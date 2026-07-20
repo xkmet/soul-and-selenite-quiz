@@ -372,7 +372,8 @@ const EMAILJS_TEMPLATE_ID = "template_808w63e";
 const EMAILJS_PUBLIC_KEY = "jy9-Cik5pVXEonzaP";
 
 function posesAsText(poses) {
-  return poses.map(p => `• ${p[0]} — ${p[1]}`).join('\n');
+  // <br> not \n — this gets inserted into an HTML email template, where a raw newline wouldn't render as a line break.
+  return poses.map(p => `• ${p[0]} — ${p[1]}`).join('<br>');
 }
 
 function sendReadingEmail() {
