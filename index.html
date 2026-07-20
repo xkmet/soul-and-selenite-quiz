@@ -352,11 +352,8 @@ const DURATION_NOTE = {
   weeks: "A few weeks in, this is worth sitting with properly rather than rushing past.",
   months: "Something that's been building this long deserves real time — be patient with yourself as you work with this."
 };
-const FORMAT_TIP = {
-  carry: "Carry it with you — in a pocket, or as jewellery, so it's close through the day.",
-  meditate: "Hold it during a few quiet minutes of meditation, or keep it where you'll see it when you sit down to reflect.",
-  ritual: "Bring it into an evening ritual — on your nightstand, in the bath, or lit by a candle as you wind down."
-};
+// Generic, not personalized to any answer — same for everyone, still useful content, doesn't need its own question.
+const GENERIC_USE_TIP = "Carry it with you, hold it during a few quiet minutes of meditation, or bring it into an evening ritual — whichever fits naturally into your day.";
 const YOGA_INTRO = {
   new: "Since you're new to yoga, take these gently — the modifications are there for a reason.",
   some: "You've got some practice already, so ease into these at whatever depth feels right today.",
@@ -366,7 +363,7 @@ const YOGA_INTRO = {
 // GUMROAD_LINK: replace with the real Gumroad listing URL once it exists. Full reading currently renders in-page instead of linking out, since there's nothing live to link to yet.
 const GUMROAD_LINK = "#";
 
-let state = { polarity: null, chakra: null, crystal: null, duration: null, format: null, yoga: null, name: '', email: '', contactDone: false, reading: false };
+let state = { polarity: null, chakra: null, crystal: null, duration: null, yoga: null, name: '', email: '', contactDone: false, reading: false };
 
 // Tumbled-stone shape — irregular rounded pebble with a soft highlight, matching how these are actually sold (polished, pocket-sized), not raw faceted points.
 function crystalIconSVG(crystalName, cls) {
@@ -391,7 +388,6 @@ function render() {
   if (!state.chakra) return renderSignpost(card);
   if (!state.crystal) return renderStatement(card);
   if (!state.duration) return renderDuration(card);
-  if (!state.format) return renderFormat(card);
   if (!state.yoga) return renderYoga(card);
   if (!state.contactDone) return renderContact(card);
   return renderResult(card);
@@ -399,14 +395,14 @@ function render() {
 
 function progressDots(step) {
   let html = '<div class="progress">';
-  for (let i = 1; i <= 7; i++) html += `<i class="${i <= step ? 'on' : ''}"></i>`;
+  for (let i = 1; i <= 6; i++) html += `<i class="${i <= step ? 'on' : ''}"></i>`;
   return html + '</div>';
 }
 
 function renderPolarity(card) {
   card.innerHTML = `
     ${progressDots(1)}
-    <p class="eyebrow">Step 1 of 7</p>
+    <p class="eyebrow">Step 1 of 6</p>
     <h1 class="q">What brings you here today?</h1>
     <div class="options">
       <button class="opt" data-p="heal">Something's feeling off and I want to work through it</button>
@@ -440,7 +436,7 @@ function renderSignpost(card) {
   const opts = SIGNPOSTS[state.polarity];
   card.innerHTML = `
     ${progressDots(2)}
-    <p class="eyebrow">Step 2 of 7</p>
+    <p class="eyebrow">Step 2 of 6</p>
     <h1 class="q">How are you feeling today?</h1>
     <div class="options">${opts.map(o => `<button class="opt" data-c="${o.chakra}">${o.label}</button>`).join('')}</div>
     ${otherBoxHTML("e.g. \"stressed about money\"")}
@@ -454,7 +450,7 @@ function renderStatement(card) {
   const opts = STATEMENTS[state.polarity][state.chakra];
   card.innerHTML = `
     ${progressDots(3)}
-    <p class="eyebrow">Step 3 of 7</p>
+    <p class="eyebrow">Step 3 of 6</p>
     <h1 class="q">Which of these feels closest to what's going on?</h1>
     <div class="options">${opts.map(o => `<button class="opt" data-x="${o[1]}">${o[0]}</button>`).join('')}</div>
     ${otherBoxHTML("Describe your situation")}
@@ -467,7 +463,7 @@ function renderStatement(card) {
 function renderDuration(card) {
   card.innerHTML = `
     ${progressDots(4)}
-    <p class="eyebrow">Step 4 of 7</p>
+    <p class="eyebrow">Step 4 of 6</p>
     <h1 class="q">How long has this been sitting with you?</h1>
     <div class="options">
       <button class="opt" data-d="today">Just today</button>
@@ -479,25 +475,10 @@ function renderDuration(card) {
   document.getElementById('back').onclick = () => { state.crystal = null; render(); };
 }
 
-function renderFormat(card) {
-  card.innerHTML = `
-    ${progressDots(5)}
-    <p class="eyebrow">Step 5 of 7</p>
-    <h1 class="q">How do you like to work with your energy?</h1>
-    <div class="options">
-      <button class="opt" data-f="carry">Carry it with me</button>
-      <button class="opt" data-f="meditate">Meditate with it</button>
-      <button class="opt" data-f="ritual">Build it into a ritual</button>
-    </div>
-    <div class="backrow"><button class="backlink" id="back">← back</button></div>`;
-  card.querySelectorAll('.opt').forEach(b => b.onclick = () => { state.format = b.dataset.f; render(); });
-  document.getElementById('back').onclick = () => { state.duration = null; render(); };
-}
-
 function renderYoga(card) {
   card.innerHTML = `
-    ${progressDots(6)}
-    <p class="eyebrow">Step 6 of 7</p>
+    ${progressDots(5)}
+    <p class="eyebrow">Step 5 of 6</p>
     <h1 class="q">New to yoga, or do you have a regular practice?</h1>
     <div class="options">
       <button class="opt" data-y="new">New to it</button>
@@ -506,13 +487,13 @@ function renderYoga(card) {
     </div>
     <div class="backrow"><button class="backlink" id="back">← back</button></div>`;
   card.querySelectorAll('.opt').forEach(b => b.onclick = () => { state.yoga = b.dataset.y; render(); });
-  document.getElementById('back').onclick = () => { state.format = null; render(); };
+  document.getElementById('back').onclick = () => { state.duration = null; render(); };
 }
 
 function renderContact(card) {
   card.innerHTML = `
-    ${progressDots(7)}
-    <p class="eyebrow">Step 7 of 7</p>
+    ${progressDots(6)}
+    <p class="eyebrow">Step 6 of 6</p>
     <h1 class="q">Where should we send your reading?</h1>
     <div class="field"><label for="fName">First name</label><input id="fName" type="text" value="${state.name}" placeholder="Optional"></div>
     <div class="field"><label for="fEmail">Email</label><input id="fEmail" type="email" value="${state.email}" placeholder="you@email.com"></div>
@@ -528,7 +509,7 @@ function renderContact(card) {
 }
 
 function resetState() {
-  state = { polarity: null, chakra: null, crystal: null, duration: null, format: null, yoga: null, name: '', email: '', contactDone: false, reading: false };
+  state = { polarity: null, chakra: null, crystal: null, duration: null, yoga: null, name: '', email: '', contactDone: false, reading: false };
 }
 
 function renderResult(card) {
@@ -566,7 +547,7 @@ function renderReading(card) {
       <p class="body-text">${DURATION_NOTE[state.duration]}</p>
       ${r.supporting.length ? `<h3>Supporting Crystals</h3><div class="support-row">${supportHTML}</div>` : ''}
       <h3>How To Use It</h3>
-      <p class="body-text">${FORMAT_TIP[state.format]}</p>
+      <p class="body-text">${GENERIC_USE_TIP}</p>
       <h3>Your Practice</h3>
       <p class="body-text">${YOGA_INTRO[state.yoga]}</p>
       <div class="pose-list">${r.poses.map(p => `<div class="pose-item"><b>${p[0]}</b> — <span>${p[1]}</span></div>`).join('')}</div>
