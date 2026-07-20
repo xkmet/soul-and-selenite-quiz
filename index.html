@@ -1,6 +1,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Soul & Selenite — Find Your Crystal</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   @font-face {
     font-family: 'Jost';
@@ -360,8 +361,36 @@ const YOGA_INTRO = {
   experienced: "With a regular practice behind you, feel free to hold these longer or explore the fuller expression."
 };
 
-// GUMROAD_LINK: replace with the real Gumroad listing URL once it exists. Full reading currently renders in-page instead of linking out, since there's nothing live to link to yet.
+// Not needed during the free 6-week pilot — no charging yet. Kept as a placeholder for the post-pilot monetization decision.
 const GUMROAD_LINK = "#";
+
+// EmailJS: fill these in once the account exists (Service ID, Template ID, Public Key from the EmailJS dashboard).
+// Free tier: 200 emails/month, no server needed — sends straight from this page. Only works on the real public
+// GitHub Pages link, not the Claude artifact preview (its CSP blocks the external EmailJS script).
+const EMAILJS_SERVICE_ID = "";
+const EMAILJS_TEMPLATE_ID = "";
+const EMAILJS_PUBLIC_KEY = "";
+
+function posesAsText(poses) {
+  return poses.map(p => `• ${p[0]} — ${p[1]}`).join('\n');
+}
+
+function sendReadingEmail() {
+  if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) return; // not configured yet
+  if (!state.email) return;
+  const r = READING[state.chakra];
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+    to_name: state.name || 'there',
+    to_email: state.email,
+    crystal_name: state.crystal,
+    chakra_line: CHAKRA_LINE[state.chakra],
+    crystal_blurb: CRYSTAL_BLURB[state.crystal],
+    chakra_paragraph: r.paragraph,
+    poses_text: posesAsText(r.poses),
+    affirmation: r.affirmation
+  }).catch(err => console.error('EmailJS send failed:', err));
+}
 
 let state = { polarity: null, chakra: null, crystal: null, duration: null, yoga: null, name: '', email: '', contactDone: false, reading: false };
 
@@ -503,6 +532,7 @@ function renderContact(card) {
     state.name = document.getElementById('fName').value.trim();
     state.email = document.getElementById('fEmail').value.trim();
     state.contactDone = true;
+    sendReadingEmail();
     render();
   };
   document.getElementById('back').onclick = () => { state.yoga = null; render(); };
