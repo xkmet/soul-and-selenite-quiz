@@ -376,6 +376,12 @@ function posesAsText(poses) {
   return poses.map(p => `• ${p[0]} — ${p[1]}`).join('<br>');
 }
 
+const ICON_BASE_URL = "https://xkmet.github.io/soul-and-selenite-quiz/icons/";
+function crystalIconUrl(crystalName) {
+  const slug = crystalName.toLowerCase().replace(/'/g, '').replace(/ /g, '-');
+  return ICON_BASE_URL + slug + ".png";
+}
+
 function sendReadingEmail() {
   if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) return; // not configured yet
   if (!state.email) return;
@@ -385,6 +391,7 @@ function sendReadingEmail() {
     to_name: state.name || 'there',
     to_email: state.email,
     crystal_name: state.crystal,
+    crystal_icon_url: crystalIconUrl(state.crystal),
     chakra_line: CHAKRA_LINE[state.chakra],
     crystal_blurb: CRYSTAL_BLURB[state.crystal],
     chakra_paragraph: r.paragraph,
