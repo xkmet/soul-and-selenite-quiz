@@ -376,7 +376,7 @@ function posesAsText(poses) {
   return poses.map(p => `• ${p[0]} — ${p[1]}`).join('<br>');
 }
 
-const ICON_BASE_URL = "https://xkmet.github.io/soul-and-selenite-quiz/icons/";
+const ICON_BASE_URL = "https://soulandselenite.co.uk/icons/";
 function crystalIconUrl(crystalName) {
   const slug = crystalName.toLowerCase().replace(/'/g, '').replace(/ /g, '-');
   return ICON_BASE_URL + slug + ".png";
