@@ -31,7 +31,12 @@
     background-size: cover; background-position: bottom center; background-repeat: no-repeat;
     mix-blend-mode: multiply; opacity: 0.6; pointer-events: none; z-index: 0;
   }
-  .hero > * { position: relative; z-index: 1; }
+  @media (prefers-color-scheme: dark) {
+    .bg-floral { mix-blend-mode: screen; filter: invert(1) hue-rotate(180deg); opacity: 0.22; }
+  }
+  :root[data-theme="dark"] .bg-floral { mix-blend-mode: screen; filter: invert(1) hue-rotate(180deg); opacity: 0.22; }
+  :root[data-theme="light"] .bg-floral { mix-blend-mode: multiply; filter: none; opacity: 0.6; }
+  .hero > *:not(.bg-floral) { position: relative; z-index: 1; }
 
   .hero { position: relative; padding: 6rem 0 5rem; text-align: center; border-bottom: 1px solid var(--line); overflow: hidden; }
   .hero svg.mark { width: 58px; height: 76px; margin: 0 auto 1.6rem; display: block; }
