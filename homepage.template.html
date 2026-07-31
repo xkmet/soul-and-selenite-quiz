@@ -26,7 +26,7 @@
   a { color: inherit; }
 
   .bg-floral {
-    position: fixed; left: 0; right: 0; bottom: 0; width: 100%; height: 420px;
+    position: fixed; left: 0; right: 0; bottom: 0; width: 100%; height: clamp(520px, 72vh, 880px);
     background-image: url('/site-assets/watercolor-thistles.png');
     background-size: cover; background-position: bottom center; background-repeat: no-repeat;
     mix-blend-mode: multiply; opacity: 0.6; pointer-events: none;
@@ -37,7 +37,9 @@
   :root[data-theme="dark"] .bg-floral { mix-blend-mode: screen; filter: invert(1) hue-rotate(180deg); opacity: 0.22; }
   :root[data-theme="light"] .bg-floral { mix-blend-mode: multiply; filter: none; opacity: 0.6; }
 
-  .hero { position: relative; padding: 6rem 0 5rem; text-align: center; border-bottom: 1px solid var(--line); }
+  .card { background: var(--surface); border-radius: 20px; box-shadow: var(--shadow); }
+
+  .hero { position: relative; text-align: center; padding: 4rem 2.5rem; margin: 2.5rem 0; }
   .hero svg.mark { width: 58px; height: 76px; margin: 0 auto 1.6rem; display: block; }
   .wordmark { text-transform: uppercase; letter-spacing: 0.18em; font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 300; margin: 0; }
   .wordmark em { font-style: normal; color: var(--sage); }
@@ -46,8 +48,7 @@
   .cta { display: inline-block; font-family: inherit; font-weight: 400; font-size: 1.05rem; color: var(--pearl); background: var(--ink-strong); text-decoration: none; padding: 1.1rem 2.6rem; border-radius: 999px; letter-spacing: 0.02em; }
   .cta:hover { opacity: 0.92; }
 
-  section.block { padding: 4.5rem 0; border-bottom: 1px solid var(--line); }
-  section.block:last-of-type { border-bottom: none; }
+  section.block { padding: 3.5rem 2.5rem; margin: 0 0 2.5rem; }
   .eyebrow { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin: 0 0 0.8rem; text-align: center; }
   h2.title { text-transform: uppercase; letter-spacing: 0.06em; font-size: 1.9rem; font-weight: 400; margin: 0 0 2.6rem; text-align: center; }
 
@@ -61,7 +62,7 @@
   .story { text-align: center; max-width: 42em; margin: 0 auto; }
   .story p { font-size: 1.2rem; line-height: 1.8; opacity: 0.88; margin: 0 0 1.4rem; }
 
-  footer.site-footer { text-align: center; padding: 2.5rem 0 3rem; font-size: 0.8rem; opacity: 0.6; }
+  footer.site-footer { text-align: center; padding: 1.6rem 2rem; margin: 0 0 2.5rem; font-size: 0.8rem; opacity: 0.75; }
   footer.site-footer a { text-decoration: underline; }
   footer.site-footer .links { margin-top: 0.6rem; }
   footer.site-footer .links a { margin: 0 0.6rem; }
@@ -71,7 +72,7 @@
 
 <div class="wrap">
 
-  <div class="hero">
+  <div class="hero card">
     <svg class="mark" viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M50,15 L58,38 L55,112 L50,124 L45,112 L42,38 Z" stroke="var(--ink-strong)" stroke-width="1.4" stroke-linejoin="round"/>
       <path d="M24,48 L30,64 L28,104 L24,112 L20,104 L18,64 Z" stroke="var(--ink-strong)" stroke-width="1.2" stroke-linejoin="round" opacity="0.75"/>
@@ -83,7 +84,7 @@
     <a class="cta" href="/quiz">Take the Free Quiz</a>
   </div>
 
-  <section class="block">
+  <section class="block card">
     <p class="eyebrow">How it works</p>
     <h2 class="title">Three steps</h2>
     <div class="steps">
@@ -105,7 +106,7 @@
     </div>
   </section>
 
-  <section class="block">
+  <section class="block card">
     <p class="eyebrow">Why this exists</p>
     <h2 class="title">Prescriptive, not intuitive</h2>
     <div class="story">
@@ -118,7 +119,7 @@
     <a class="cta" href="/quiz">Take the Free Quiz</a>
   </div>
 
-  <footer class="site-footer">
+  <footer class="site-footer card">
     <div>&copy; 2026 Soul &amp; Selenite</div>
     <div class="links">
       <a href="/privacy">Privacy Policy</a>
