@@ -1,6 +1,5 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="p:domain_verify" content="e7de7f531b17c83e0015ee2e7e240d39"/>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KS28VD4RE"></script>
 <script>
@@ -9,7 +8,8 @@
   gtag('js', new Date());
   gtag('config', 'G-6KS28VD4RE');
 </script>
-<title>Soul & Selenite — A crystal, a chakra, a practice</title>
+<title>Gentle Yoga for Headaches, Colds & Everyday Tension — Soul & Selenite</title>
+<meta name="description" content="Gentle, beginner-safe yoga poses for headaches, a blocked nose, and everyday tension — simple things to try when you just don't feel quite right.">
 <style>
   @font-face {
     font-family: 'Jost';
@@ -31,67 +31,30 @@
 
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--pearl); color: var(--ink-strong); font-family: 'Jost','Century Gothic',sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; }
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; position: relative; }
-  a { color: inherit; }
-
-  .bg-floral {
-    display: none; /* watercolor background switched off 2026-08-01 at wife's request — re-enable by removing this line */
-    position: fixed; left: 0; right: 0; bottom: 0; width: 100%; height: clamp(200px, 56.25vw, 2400px);
-    background-image: url('/site-assets/watercolor-thistles.png');
-    background-size: cover; background-position: bottom center; background-repeat: no-repeat;
-    mix-blend-mode: multiply; opacity: 0.6; pointer-events: none;
-  }
-  @media (prefers-color-scheme: dark) {
-    .bg-floral { mix-blend-mode: screen; filter: invert(1) hue-rotate(180deg); opacity: 0.22; }
-  }
-  :root[data-theme="dark"] .bg-floral { mix-blend-mode: screen; filter: invert(1) hue-rotate(180deg); opacity: 0.22; }
-  :root[data-theme="light"] .bg-floral { mix-blend-mode: multiply; filter: none; opacity: 0.6; }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 0 2.5rem; }
+  a { color: var(--sage); }
 
   .card { background: var(--surface); border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--sage); }
 
-  .hero { position: relative; text-align: center; padding: 4rem 2.5rem; margin: 2.5rem 0; }
-  .hero svg.mark { width: 58px; height: 76px; margin: 0 auto 1.6rem; display: block; }
-  .wordmark { text-transform: uppercase; letter-spacing: 0.18em; font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 300; margin: 0; }
-  .wordmark em { font-style: normal; color: var(--sage); }
-  .rule { width: 110px; height: 1px; background: var(--sage); opacity: 0.6; margin: 1.4rem auto; border: none; }
-  .tagline { font-size: 1.35rem; line-height: 1.6; max-width: 40em; margin: 0 auto 2.6rem; opacity: 0.85; }
+  @media (max-width: 480px) { .wrap { padding: 0 1.1rem; } }
+
+  .back { display: inline-block; font-size: 0.85rem; opacity: 0.75; text-decoration: none; margin: 2.5rem 0 1.5rem; }
+
+  article.card { padding: 3rem 2.8rem 3.5rem; margin: 0 0 2.5rem; }
+  @media (max-width: 480px) { article.card { padding: 2rem 1.4rem 2.5rem; } }
+
+  .eyebrow { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin: 0 0 0.8rem; text-align: center; }
+  h1.title { text-transform: uppercase; letter-spacing: 0.04em; font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 400; margin: 0 0 2rem; text-align: center; line-height: 1.3; }
+  article p.lead { font-size: 1.2rem; line-height: 1.8; opacity: 0.9; margin: 0 0 2.2rem; }
+  article h2 { font-size: 1.3rem; font-weight: 500; margin: 2.4rem 0 0.8rem; color: var(--ink-strong); }
+  article p { font-size: 1.08rem; line-height: 1.8; opacity: 0.88; margin: 0 0 1.2rem; }
+  article .pose { margin: 0 0 1rem; }
+  article .pose b { font-weight: 500; color: var(--ink-strong); }
+  article .note { font-size: 0.95rem; line-height: 1.7; opacity: 0.75; border-top: 1px solid var(--line); margin-top: 2.6rem; padding-top: 1.6rem; }
+
+  .cta-row { text-align: center; padding: 0.5rem 0 3rem; }
   .cta { display: inline-block; font-family: inherit; font-weight: 400; font-size: 1.05rem; color: var(--pearl); background: var(--ink-strong); text-decoration: none; padding: 1.1rem 2.6rem; border-radius: 999px; letter-spacing: 0.02em; }
   .cta:hover { opacity: 0.92; }
-
-  @media (max-width: 480px) {
-    .wrap { padding: 0 1.1rem; }
-    .hero { padding: 3rem 1.3rem; }
-    .wordmark { font-size: 1.6rem; letter-spacing: 0.06em; }
-    section.block { padding: 2.5rem 1.3rem; }
-  }
-
-  .crystals-card { overflow: hidden; margin: 0 0 2.5rem; }
-  .crystals-card img { display: block; width: 100%; height: auto; }
-  .crystals-caption { padding: 2.2rem 2.5rem 2.6rem; text-align: center; }
-  .crystals-caption p.body { font-size: 1.1rem; line-height: 1.7; opacity: 0.85; max-width: 36em; margin: 0.6rem auto 0; }
-  @media (max-width: 480px) { .crystals-caption { padding: 1.8rem 1.3rem 2.2rem; } }
-
-  section.block { padding: 3.5rem 2.5rem; margin: 0 0 2.5rem; }
-  .eyebrow { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin: 0 0 0.8rem; text-align: center; }
-  h2.title { text-transform: uppercase; letter-spacing: 0.06em; font-size: 1.9rem; font-weight: 400; margin: 0 0 2.6rem; text-align: center; }
-
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
-  @media (max-width: 640px) { .steps { grid-template-columns: 1fr; } }
-  .step { text-align: center; }
-  .step .num { font-family: inherit; font-size: 0.85rem; letter-spacing: 0.1em; color: var(--sage); margin: 0 0 0.7rem; }
-  .step h3 { font-size: 1.3rem; font-weight: 400; margin: 0 0 0.7rem; }
-  .step p { font-size: 1.05rem; line-height: 1.6; opacity: 0.8; margin: 0; }
-
-  .story { text-align: center; max-width: 42em; margin: 0 auto; }
-  .story p { font-size: 1.2rem; line-height: 1.8; opacity: 0.88; margin: 0 0 1.4rem; }
-
-  .guides { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
-  @media (max-width: 640px) { .guides { grid-template-columns: 1fr; } }
-  .guide-link { display: block; text-decoration: none; color: inherit; background: var(--pearl); border: 1px solid var(--line); border-radius: 14px; padding: 1.6rem 1.7rem; }
-  .guide-link:hover { border-color: var(--sage); }
-  .guide-link .eyebrow { text-align: left; margin-bottom: 0.5rem; }
-  .guide-link h3 { font-size: 1.15rem; font-weight: 500; margin: 0 0 0.5rem; }
-  .guide-link p { font-size: 0.95rem; line-height: 1.6; opacity: 0.8; margin: 0; }
 
   footer.site-footer { text-align: center; padding: 1.6rem 2rem; margin: 0 0 2.5rem; font-size: 0.8rem; opacity: 0.75; }
   footer.site-footer a { text-decoration: underline; }
@@ -99,80 +62,32 @@
   footer.site-footer .links a { margin: 0 0.6rem; }
 </style>
 
-<div class="bg-floral" aria-hidden="true"></div>
-
 <div class="wrap">
 
-  <div class="hero card">
-    <svg class="mark" viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M50,15 L58,38 L55,112 L50,124 L45,112 L42,38 Z" stroke="var(--ink-strong)" stroke-width="1.4" stroke-linejoin="round"/>
-      <path d="M24,48 L30,64 L28,104 L24,112 L20,104 L18,64 Z" stroke="var(--ink-strong)" stroke-width="1.2" stroke-linejoin="round" opacity="0.75"/>
-      <path d="M76,52 L81,66 L79,100 L76,108 L73,100 L71,66 Z" stroke="var(--ink-strong)" stroke-width="1.2" stroke-linejoin="round" opacity="0.75"/>
-    </svg>
-    <h1 class="wordmark">Soul<em>&amp;</em>Selenite</h1>
-    <hr class="rule">
-    <p class="tagline">A crystal, a chakra, a practice — matched to exactly where you are. Answer a few honest questions, and we'll send you a full personal reading, free.</p>
-    <a class="cta" href="/quiz">Take the Free Quiz</a>
-  </div>
+  <a class="back" href="/">&larr; Back to Soul &amp; Selenite</a>
 
-  <div class="card crystals-card">
-    <img src="/site-assets/crystal-flatlay.png" alt="A row of real healing crystals: rose quartz, citrine, clear quartz, black tourmaline and selenite" loading="lazy">
-    <div class="crystals-caption">
-      <p class="eyebrow">What we work with</p>
-      <h2 class="title" style="margin-bottom:0;">Real crystals, real correspondence</h2>
-      <p class="body">Every reading points you toward one of 35 real crystals — matched by chakra.</p>
-    </div>
-  </div>
+  <article class="card">
+    <p class="eyebrow">Gentle practice</p>
+    <h1 class="title">Gentle Yoga for Headaches, Colds &amp; Everyday Tension</h1>
+    <p class="lead">Not every practice needs to start with a reading. Some days you just want something small and gentle for exactly how you're feeling right now — here are a few simple things worth trying.</p>
 
-  <section class="block card">
-    <p class="eyebrow">How it works</p>
-    <h2 class="title">Three steps</h2>
-    <div class="steps">
-      <div class="step">
-        <p class="num">01</p>
-        <h3>Answer honestly</h3>
-        <p>A few short questions about how you're actually feeling right now.</p>
-      </div>
-      <div class="step">
-        <p class="num">02</p>
-        <h3>Get matched</h3>
-        <p>One of 35 crystals, chosen for your specific situation.</p>
-      </div>
-      <div class="step">
-        <p class="num">03</p>
-        <h3>Receive your reading</h3>
-        <p>Your crystal, its chakra, and a short yoga practice — sent straight to your inbox, free.</p>
-      </div>
-    </div>
-  </section>
+    <h2>For a headache</h2>
+    <p class="pose"><b>Shoulder and neck rolls</b> — inhale and draw your shoulders up towards your ears, exhale and let them drop back and down. Repeat slowly, then add a few gentle neck rolls. Headaches often sit in tight shoulders more than we realise.</p>
+    <p class="pose"><b>Cat-Cow</b> — hands and knees, alternate arching and rounding your spine with your breath. Slow, unhurried movement through the whole back of the body.</p>
+    <p class="pose"><b>Savasana</b> — lie flat, arms relaxed, eyes closed. Even five quiet minutes of normal, gentle breathing can ease a headache that's really about needing to switch off.</p>
 
-  <section class="block card">
-    <p class="eyebrow">Why this exists</p>
-    <h2 class="title">Prescriptive, not intuitive</h2>
-    <div class="story">
-      <p>Choosing a crystal usually means relying on whatever you're drawn to in the moment — dowsing over a handful of stones, or waiting for one to catch your eye. But that takes time, and some days nothing quite calls out to you. This quiz works the other way round: a few honest questions do the noticing for you, matching you to the crystal you actually need, whether or not you'd have reached for it yourself.</p>
-      <p>Every result is grounded in real chakra correspondence, paired with a short yoga practice to work with your energy flow and help release what's weighing you down.</p>
-    </div>
-  </section>
+    <h2>For a blocked nose or heavy head</h2>
+    <p class="pose"><b>Gentle forward fold</b> — feet hip-width apart, soft knees, fold forward and let your head hang. Gravity does some of the work here, easing pressure in the sinuses. Come up slowly.</p>
+    <p class="pose"><b>Child's Pose</b> — kneel, sit back on your heels, fold forward with your forehead resting down (a cushion under your forehead or chest if that's more comfortable). Slow, easy breathing through the nose if you can manage it.</p>
 
-  <section class="block card">
-    <p class="eyebrow">Go deeper</p>
-    <h2 class="title">Guides</h2>
-    <div class="guides">
-      <a class="guide-link" href="/guides/real-vs-fake-crystals">
-        <p class="eyebrow">Crystal care</p>
-        <h3>How to Tell Real Crystals From Fake</h3>
-        <p>Colour, weight, shape, and the scratch test — four honest checks before you buy.</p>
-      </a>
-      <a class="guide-link" href="/guides/gentle-yoga">
-        <p class="eyebrow">Gentle practice</p>
-        <h3>Gentle Yoga for Headaches, Colds &amp; Tension</h3>
-        <p>Simple, beginner-safe poses for the days you just don't feel quite right.</p>
-      </a>
-    </div>
-  </section>
+    <h2>For tension you're carrying</h2>
+    <p class="pose"><b>Cat-Cow</b>, again — genuinely useful for more than one thing. Slow spinal movement releases tension that builds up from sitting still or carrying stress in the body.</p>
+    <p class="pose"><b>Legs-Up-The-Wall</b> — lie on your back, legs resting up a wall, arms relaxed at your sides. A quietly restorative pose that needs nothing more than a wall and a few spare minutes.</p>
 
-  <div style="text-align:center; padding: 3rem 0;">
+    <p class="note">Keep all of this gentle — nothing here should involve strong twists, deep backbends, or inversions like headstands, especially with a headache or while unwell. If a pose doesn't feel right, stop. This is a starting point for feeling a little better, not medical advice, and it's not a substitute for seeing a doctor if something persists or feels serious.</p>
+  </article>
+
+  <div class="cta-row">
     <a class="cta" href="/quiz">Take the Free Quiz</a>
   </div>
 
