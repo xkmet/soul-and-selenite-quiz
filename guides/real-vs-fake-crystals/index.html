@@ -34,7 +34,7 @@
   .wrap { max-width: 800px; margin: 0 auto; padding: 0 2.5rem; }
   a { color: var(--sage); }
 
-  .card { background: var(--surface); border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--sage); }
+  .card { background: var(--surface); border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--sage); overflow: hidden; }
 
   @media (max-width: 480px) { .wrap { padding: 0 1.1rem; } }
 
@@ -42,6 +42,9 @@
 
   article.card { padding: 3rem 2.8rem 3.5rem; margin: 0 0 2.5rem; }
   @media (max-width: 480px) { article.card { padding: 2rem 1.4rem 2.5rem; } }
+
+  .guide-image { display: block; width: calc(100% + 5.6rem); margin: -3rem -2.8rem 2.4rem; }
+  @media (max-width: 480px) { .guide-image { width: calc(100% + 2.8rem); margin: -2rem -1.4rem 1.8rem; } }
 
   .eyebrow { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin: 0 0 0.8rem; text-align: center; }
   h1.title { text-transform: uppercase; letter-spacing: 0.04em; font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 400; margin: 0 0 2rem; text-align: center; line-height: 1.3; }
@@ -66,6 +69,7 @@
   <a class="back" href="/">&larr; Back to Soul &amp; Selenite</a>
 
   <article class="card">
+    <img class="guide-image" src="/site-assets/guide-real-vs-fake.png" alt="A clear quartz crystal point held up to soft natural light, examining its facets and texture" loading="lazy">
     <p class="eyebrow">Crystal care</p>
     <h1 class="title">How to Tell Real Crystals From Fake</h1>
     <p class="lead">Dyed glass, resin, and synthetic stones are everywhere — sold cheerfully alongside the real thing, often at genuine-crystal prices. None of this needs special equipment to spot. A few honest checks, and you'll know what you're actually holding.</p>
