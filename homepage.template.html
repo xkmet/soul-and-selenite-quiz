@@ -85,6 +85,14 @@
   .story { text-align: center; max-width: 42em; margin: 0 auto; }
   .story p { font-size: 1.2rem; line-height: 1.8; opacity: 0.88; margin: 0 0 1.4rem; }
 
+  .guides { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
+  @media (max-width: 640px) { .guides { grid-template-columns: 1fr; } }
+  .guide-link { display: block; text-decoration: none; color: inherit; background: var(--pearl); border: 1px solid var(--line); border-radius: 14px; padding: 1.6rem 1.7rem; }
+  .guide-link:hover { border-color: var(--sage); }
+  .guide-link .eyebrow { text-align: left; margin-bottom: 0.5rem; }
+  .guide-link h3 { font-size: 1.15rem; font-weight: 500; margin: 0 0 0.5rem; }
+  .guide-link p { font-size: 0.95rem; line-height: 1.6; opacity: 0.8; margin: 0; }
+
   footer.site-footer { text-align: center; padding: 1.6rem 2rem; margin: 0 0 2.5rem; font-size: 0.8rem; opacity: 0.75; }
   footer.site-footer a { text-decoration: underline; }
   footer.site-footer .links { margin-top: 0.6rem; }
@@ -144,6 +152,23 @@
     <div class="story">
       <p>Choosing a crystal usually means relying on whatever you're drawn to in the moment — dowsing over a handful of stones, or waiting for one to catch your eye. But that takes time, and some days nothing quite calls out to you. This quiz works the other way round: a few honest questions do the noticing for you, matching you to the crystal you actually need, whether or not you'd have reached for it yourself.</p>
       <p>Every result is grounded in real chakra correspondence, paired with a short yoga practice to work with your energy flow and help release what's weighing you down.</p>
+    </div>
+  </section>
+
+  <section class="block card">
+    <p class="eyebrow">Go deeper</p>
+    <h2 class="title">Guides</h2>
+    <div class="guides">
+      <a class="guide-link" href="/guides/real-vs-fake-crystals">
+        <p class="eyebrow">Crystal care</p>
+        <h3>How to Tell Real Crystals From Fake</h3>
+        <p>Colour, weight, shape, and the scratch test — four honest checks before you buy.</p>
+      </a>
+      <a class="guide-link" href="/guides/gentle-yoga">
+        <p class="eyebrow">Gentle practice</p>
+        <h3>Gentle Yoga for Headaches, Colds &amp; Tension</h3>
+        <p>Simple, beginner-safe poses for the days you just don't feel quite right.</p>
+      </a>
     </div>
   </section>
 
