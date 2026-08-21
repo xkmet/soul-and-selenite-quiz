@@ -410,6 +410,8 @@ function sendReadingEmail() {
     chakra_paragraph: r.paragraph,
     poses_text: posesAsText(r.poses),
     affirmation: r.affirmation
+  }).then(() => {
+    if (typeof gtag === 'function') gtag('event', 'email_sent', { chakra: state.chakra, crystal: state.crystal });
   }).catch(err => console.error('EmailJS send failed:', err));
 }
 
@@ -553,6 +555,7 @@ function renderContact(card) {
     state.name = document.getElementById('fName').value.trim();
     state.email = document.getElementById('fEmail').value.trim();
     state.contactDone = true;
+    if (typeof gtag === 'function') gtag('event', 'quiz_completed', { chakra: state.chakra, crystal: state.crystal, polarity: state.polarity });
     sendReadingEmail();
     render();
   };
