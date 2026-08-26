@@ -39,12 +39,17 @@
   }
   function ssDisableAnalytics() {
     window.ssAnalyticsEnabled = false;
-    // Best-effort ask to an already-loaded tag to stop its own automatic
-    // collection too -- a script already running in the page can't be
-    // forcibly unloaded, so this is defence-in-depth, not the primary
-    // mechanism (the primary mechanism is ssAnalyticsEnabled gating every
-    // one of this site's own event calls -- see trackEvent()).
-    gtag('consent', 'update', { analytics_storage: 'denied' });
+    if (window.ssGA4ScriptLoaded) {
+      // Only send a consent signal if there is an actual Google tag running
+      // to receive it -- queuing this into dataLayer before the script has
+      // ever loaded would sit ahead of the eventual js/config calls once it
+      // does load (dataLayer is processed in order from the start).
+      // Confirmed via a real network check: without this guard, a same-page
+      // decline-then-accept made Google's own tag report analytics_storage
+      // as denied (gcs=G1-0) on the very first hit, even though
+      // ssAnalyticsEnabled was already true by then.
+      gtag('consent', 'update', { analytics_storage: 'denied' });
+    }
   }
   try {
     if (localStorage.getItem('ss_analytics_consent') === 'granted') { ssEnableAnalytics(); }
