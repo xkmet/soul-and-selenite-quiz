@@ -3,24 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6KS28VD4RE"></script>
+<!-- Google tag (gtag.js) -- Basic Consent Mode: the tag is never requested
+     from Google until the visitor accepts analytics cookies (or a prior
+     "granted" choice is found in localStorage), so no request of any kind
+     reaches Google before consent. See the Cookie settings control near the
+     end of this page, and projects/crystal-chakra-quiz/context.md. -->
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  // Consent Mode v2: analytics cookies stay denied until the visitor accepts
-  // the banner below (UK PECR/GDPR requires opt-in consent for non-essential
-  // cookies; GA4's own cookies -- _ga / _ga_<id> -- are not "strictly necessary").
-  gtag('consent', 'default', { analytics_storage: 'denied' });
-  (function () {
-    try {
-      if (localStorage.getItem('ss_analytics_consent') === 'granted') {
-        gtag('consent', 'default', { analytics_storage: 'granted' });
-      }
-    } catch (e) {}
-  })();
-  gtag('js', new Date());
-  gtag('config', 'G-6KS28VD4RE', { anonymize_ip: true });
+  function gtag(){ dataLayer.push(arguments); }
+  window.ssGA4Loaded = false;
+  function ssLoadGA4() {
+    if (window.ssGA4Loaded) return;
+    window.ssGA4Loaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6KS28VD4RE';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', 'G-6KS28VD4RE', { anonymize_ip: true });
+  }
+  try {
+    if (localStorage.getItem('ss_analytics_consent') === 'granted') { ssLoadGA4(); }
+  } catch (e) {}
 </script>
 <title>Privacy Policy — Soul & Selenite</title>
 <style>
@@ -77,7 +81,7 @@
   <ul>
     <li><strong>EmailJS</strong> — delivers the reading email to your inbox.</li>
     <li><strong>Hostinger</strong> — hosts this website and may log standard technical data (like IP address) as part of normal web server operation.</li>
-    <li><strong>Google Analytics (GA4)</strong> — helps us understand how visitors use the site (pages viewed, quiz steps reached, general device/location) so we can improve it. This only runs if you accept the optional analytics cookies described below, and it never receives your name, email address, or what you typed into the quiz.</li>
+    <li><strong>Google Analytics (GA4)</strong> — helps us understand how visitors use the site (pages viewed, quiz steps reached, general device/location) so we can improve it. It is not loaded at all until you accept the optional analytics cookies described below, and it never receives your name, email address, or what you typed into the quiz.</li>
   </ul>
   <p>We do not sell or share your data with anyone for marketing purposes.</p>
 
@@ -88,7 +92,7 @@
   <p>Under UK GDPR, you can ask us what data we hold about you, ask us to correct or delete it, or object to how it's used. Contact <a href="mailto:soulandselenite@gmail.com">soulandselenite@gmail.com</a> for any of these. You can also complain to the UK Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a> if you're unhappy with how we've handled your data.</p>
 
   <h2>Cookies</h2>
-  <p>We use Google Analytics (GA4) to understand how visitors use this site — but only if you accept the optional cookies banner shown when you first visit. If you accept, Google Analytics sets a couple of first-party cookies (typically named <code>_ga</code> and <code>_ga_&lt;id&gt;</code>) to distinguish visitors and sessions; if you decline or don't respond, no analytics cookies are set and no analytics data about your visit is collected. You can change your mind at any time by clearing your browser's cookies for this site, which will show the banner again on your next visit.</p>
+  <p>We use Google Analytics (GA4) to understand how visitors use this site — but only if you accept the optional cookies banner shown when you first visit. Analytics is not sent to Google unless you accept: until you do, the Google Analytics code isn't loaded at all, so no request of any kind reaches Google's servers and no analytics cookies are set. If you accept, Google Analytics loads at that point and sets a couple of first-party cookies (typically named <code>_ga</code> and <code>_ga_&lt;id&gt;</code>) to distinguish visitors and sessions. You can review or change your choice at any time using the "Cookie settings" link at the bottom of this and every page.</p>
   <p>We don't use any advertising, retargeting, or cross-site tracking cookies. The only other "cookie-like" storage on this site is your browser's own <code>localStorage</code>, used to remember your cookie choice — this never leaves your device.</p>
 
   <h2>Marketing emails</h2>
@@ -126,17 +130,21 @@
     function showSettingsLink() { banner.hidden = true; settingsLink.hidden = false; }
 
     // Withdrawing consent must be exactly as easy as giving it (ICO guidance):
-    // the same 'Cookie settings' control re-opens this banner at any time, and
-    // choosing 'Necessary only' here always sends an explicit consent update,
-    // not just a stored preference -- covers revoking a consent already
-    // granted earlier in the same page view, not only the first-ever choice.
+    // the same 'Cookie settings' control re-opens this banner at any time.
     if (accept) accept.onclick = function () {
       try { localStorage.setItem(KEY, 'granted'); } catch (e) {}
-      if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+      ssLoadGA4(); // Basic Consent Mode: loads right now, no reload needed.
       showSettingsLink();
     };
     if (decline) decline.onclick = function () {
       try { localStorage.setItem(KEY, 'denied'); } catch (e) {}
+      // Stops this site's own event calls immediately (ssGA4Loaded gates
+      // every custom event call). If GA4 was already loaded earlier in this
+      // same page view (a prior Accept, now withdrawn), also tells Google's
+      // tag directly to stop -- best-effort, since a script already running
+      // in the page can't be forcibly unloaded, but this halts its own
+      // further automatic collection too.
+      window.ssGA4Loaded = false;
       if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'denied' });
       showSettingsLink();
     };

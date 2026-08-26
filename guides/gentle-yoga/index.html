@@ -3,24 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6KS28VD4RE"></script>
+<!-- Google tag (gtag.js) -- Basic Consent Mode: the tag is never requested
+     from Google until the visitor accepts analytics cookies (or a prior
+     "granted" choice is found in localStorage), so no request of any kind
+     reaches Google before consent. See the Cookie settings control near the
+     end of this page, and projects/crystal-chakra-quiz/context.md. -->
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  // Consent Mode v2: analytics cookies stay denied until the visitor accepts
-  // the banner below (UK PECR/GDPR requires opt-in consent for non-essential
-  // cookies; GA4's own cookies -- _ga / _ga_<id> -- are not "strictly necessary").
-  gtag('consent', 'default', { analytics_storage: 'denied' });
-  (function () {
-    try {
-      if (localStorage.getItem('ss_analytics_consent') === 'granted') {
-        gtag('consent', 'default', { analytics_storage: 'granted' });
-      }
-    } catch (e) {}
-  })();
-  gtag('js', new Date());
-  gtag('config', 'G-6KS28VD4RE', { anonymize_ip: true });
+  function gtag(){ dataLayer.push(arguments); }
+  window.ssGA4Loaded = false;
+  function ssLoadGA4() {
+    if (window.ssGA4Loaded) return;
+    window.ssGA4Loaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6KS28VD4RE';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', 'G-6KS28VD4RE', { anonymize_ip: true });
+  }
+  try {
+    if (localStorage.getItem('ss_analytics_consent') === 'granted') { ssLoadGA4(); }
+  } catch (e) {}
 </script>
 <title>Gentle Yoga for Headaches, Colds & Everyday Tension — Soul & Selenite</title>
 <meta name="description" content="Gentle, beginner-safe yoga poses for headaches, a blocked nose, and everyday tension — simple things to try when you just don't feel quite right.">
@@ -140,7 +144,7 @@
   </article>
 
   <div class="cta-row">
-    <a class="cta" href="/quiz" onclick="if(typeof gtag==='function')gtag('event','guide_to_quiz_click',{guide:'gentle-yoga'});">Take the Free Quiz</a>
+    <a class="cta" href="/quiz" onclick="if(window.ssGA4Loaded)gtag('event','guide_to_quiz_click',{guide:'gentle-yoga'});">Take the Free Quiz</a>
   </div>
 
   <footer class="site-footer card">
@@ -184,17 +188,21 @@
     function showSettingsLink() { banner.hidden = true; settingsLink.hidden = false; }
 
     // Withdrawing consent must be exactly as easy as giving it (ICO guidance):
-    // the same 'Cookie settings' control re-opens this banner at any time, and
-    // choosing 'Necessary only' here always sends an explicit consent update,
-    // not just a stored preference -- covers revoking a consent already
-    // granted earlier in the same page view, not only the first-ever choice.
+    // the same 'Cookie settings' control re-opens this banner at any time.
     if (accept) accept.onclick = function () {
       try { localStorage.setItem(KEY, 'granted'); } catch (e) {}
-      if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+      ssLoadGA4(); // Basic Consent Mode: loads right now, no reload needed.
       showSettingsLink();
     };
     if (decline) decline.onclick = function () {
       try { localStorage.setItem(KEY, 'denied'); } catch (e) {}
+      // Stops this site's own event calls immediately (ssGA4Loaded gates
+      // every custom event call). If GA4 was already loaded earlier in this
+      // same page view (a prior Accept, now withdrawn), also tells Google's
+      // tag directly to stop -- best-effort, since a script already running
+      // in the page can't be forcibly unloaded, but this halts its own
+      // further automatic collection too.
+      window.ssGA4Loaded = false;
       if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'denied' });
       showSettingsLink();
     };
