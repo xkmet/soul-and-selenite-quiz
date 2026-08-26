@@ -8,8 +8,19 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  // Consent Mode v2: analytics cookies stay denied until the visitor accepts
+  // the banner below (UK PECR/GDPR requires opt-in consent for non-essential
+  // cookies; GA4's own cookies -- _ga / _ga_<id> -- are not "strictly necessary").
+  gtag('consent', 'default', { analytics_storage: 'denied' });
+  (function () {
+    try {
+      if (localStorage.getItem('ss_analytics_consent') === 'granted') {
+        gtag('consent', 'default', { analytics_storage: 'granted' });
+      }
+    } catch (e) {}
+  })();
   gtag('js', new Date());
-  gtag('config', 'G-6KS28VD4RE');
+  gtag('config', 'G-6KS28VD4RE', { anonymize_ip: true });
 </script>
 <title>How to Tell Real Crystals From Fake — Soul & Selenite</title>
 <meta name="description" content="A practical guide to spotting dyed glass, resin, and synthetic crystals — colour, weight, shape, and the scratch test — so you can buy with confidence.">
@@ -95,7 +106,7 @@
   </article>
 
   <div class="cta-row">
-    <a class="cta" href="/quiz">Take the Free Quiz</a>
+    <a class="cta" href="/quiz" onclick="if(typeof gtag==='function')gtag('event','guide_to_quiz_click',{guide:'real-vs-fake-crystals'});">Take the Free Quiz</a>
   </div>
 
   <footer class="site-footer card">
@@ -107,5 +118,44 @@
   </footer>
 
 </div>
+<div id="ssCookieBanner" class="ss-cookie-banner" hidden role="dialog" aria-label="Cookie preferences">
+  <p>We use optional analytics cookies to see how visitors use this site, so we can improve it. No quiz answers, names or email addresses are ever included. <a href="/privacy">Learn more</a>.</p>
+  <div class="ss-cookie-actions">
+    <button type="button" id="ssCookieAccept">Accept</button>
+    <button type="button" id="ssCookieDecline">Necessary only</button>
+  </div>
+</div>
+<style>
+  .ss-cookie-banner{position:relative;max-width:600px;margin:1.6rem auto 0;background:var(--surface);color:var(--ink-strong);border:1px solid var(--sage);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;font-family:'Jost','Century Gothic',sans-serif;font-weight:300;font-size:0.92rem;line-height:1.5;}
+  .ss-cookie-banner p{margin:0 0 12px;}
+  .ss-cookie-banner a{color:var(--sage);}
+  .ss-cookie-actions{display:flex;gap:10px;flex-wrap:wrap;}
+  .ss-cookie-actions button{font-family:inherit;font-weight:400;font-size:0.88rem;padding:8px 16px;border-radius:999px;border:1px solid var(--sage);background:transparent;color:var(--ink-strong);cursor:pointer;}
+  #ssCookieAccept{background:var(--sage);color:var(--surface);border-color:var(--sage);}
+</style>
+<script>
+(function () {
+  try {
+    var KEY = 'ss_analytics_consent';
+    if (!localStorage.getItem(KEY)) {
+      var b = document.getElementById('ssCookieBanner');
+      if (b) {
+        b.hidden = false;
+        var accept = document.getElementById('ssCookieAccept');
+        var decline = document.getElementById('ssCookieDecline');
+        if (accept) accept.onclick = function () {
+          try { localStorage.setItem(KEY, 'granted'); } catch (e) {}
+          if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+          b.hidden = true;
+        };
+        if (decline) decline.onclick = function () {
+          try { localStorage.setItem(KEY, 'denied'); } catch (e) {}
+          b.hidden = true;
+        };
+      }
+    }
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
