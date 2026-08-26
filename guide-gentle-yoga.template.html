@@ -159,6 +159,7 @@
     <button type="button" id="ssCookieDecline">Necessary only</button>
   </div>
 </div>
+<button type="button" id="ssCookieSettingsLink" class="ss-cookie-settings-link" hidden>Cookie settings</button>
 <style>
   .ss-cookie-banner{position:relative;max-width:600px;margin:1.6rem auto 0;background:var(--surface);color:var(--ink-strong);border:1px solid var(--sage);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;font-family:'Jost','Century Gothic',sans-serif;font-weight:300;font-size:0.92rem;line-height:1.5;}
   .ss-cookie-banner p{margin:0 0 12px;}
@@ -166,28 +167,40 @@
   .ss-cookie-actions{display:flex;gap:10px;flex-wrap:wrap;}
   .ss-cookie-actions button{font-family:inherit;font-weight:400;font-size:0.88rem;padding:8px 16px;border-radius:999px;border:1px solid var(--sage);background:transparent;color:var(--ink-strong);cursor:pointer;}
   #ssCookieAccept{background:var(--sage);color:var(--surface);border-color:var(--sage);}
+  .ss-cookie-settings-link{display:block;margin:1.4rem auto 0;background:none;border:none;font-family:'Jost','Century Gothic',sans-serif;font-weight:300;font-size:0.78rem;color:var(--ink);opacity:0.6;text-decoration:underline;cursor:pointer;padding:0;}
+  .ss-cookie-settings-link:hover{opacity:1;}
 </style>
 <script>
 (function () {
   try {
     var KEY = 'ss_analytics_consent';
-    if (!localStorage.getItem(KEY)) {
-      var b = document.getElementById('ssCookieBanner');
-      if (b) {
-        b.hidden = false;
-        var accept = document.getElementById('ssCookieAccept');
-        var decline = document.getElementById('ssCookieDecline');
-        if (accept) accept.onclick = function () {
-          try { localStorage.setItem(KEY, 'granted'); } catch (e) {}
-          if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
-          b.hidden = true;
-        };
-        if (decline) decline.onclick = function () {
-          try { localStorage.setItem(KEY, 'denied'); } catch (e) {}
-          b.hidden = true;
-        };
-      }
-    }
+    var banner = document.getElementById('ssCookieBanner');
+    var settingsLink = document.getElementById('ssCookieSettingsLink');
+    var accept = document.getElementById('ssCookieAccept');
+    var decline = document.getElementById('ssCookieDecline');
+    if (!banner || !settingsLink) return;
+
+    function showBanner() { banner.hidden = false; settingsLink.hidden = true; }
+    function showSettingsLink() { banner.hidden = true; settingsLink.hidden = false; }
+
+    // Withdrawing consent must be exactly as easy as giving it (ICO guidance):
+    // the same 'Cookie settings' control re-opens this banner at any time, and
+    // choosing 'Necessary only' here always sends an explicit consent update,
+    // not just a stored preference -- covers revoking a consent already
+    // granted earlier in the same page view, not only the first-ever choice.
+    if (accept) accept.onclick = function () {
+      try { localStorage.setItem(KEY, 'granted'); } catch (e) {}
+      if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'granted' });
+      showSettingsLink();
+    };
+    if (decline) decline.onclick = function () {
+      try { localStorage.setItem(KEY, 'denied'); } catch (e) {}
+      if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'denied' });
+      showSettingsLink();
+    };
+    settingsLink.onclick = showBanner;
+
+    if (localStorage.getItem(KEY)) { showSettingsLink(); } else { showBanner(); }
   } catch (e) {}
 })();
 </script>
