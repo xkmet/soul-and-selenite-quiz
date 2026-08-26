@@ -6,15 +6,28 @@
 <!-- Google tag (gtag.js) -- Basic Consent Mode: the tag is never requested
      from Google until the visitor accepts analytics cookies (or a prior
      "granted" choice is found in localStorage), so no request of any kind
-     reaches Google before consent. See the Cookie settings control near the
-     end of this page, and projects/crystal-chakra-quiz/context.md. -->
+     reaches Google before consent. Two separate states, deliberately not
+     conflated: ssGA4ScriptLoaded (has the Google script physically been
+     injected -- never reverts once true, since a loaded script can't be
+     unloaded) and ssAnalyticsEnabled (does the visitor CURRENTLY permit
+     analytics -- this is what gates every custom event call, and can flip
+     back and forth as many times as Accept/Necessary only is clicked in
+     one page view). See the Cookie settings control near the end of this
+     page, and projects/crystal-chakra-quiz/context.md. -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
-  window.ssGA4Loaded = false;
-  function ssLoadGA4() {
-    if (window.ssGA4Loaded) return;
-    window.ssGA4Loaded = true;
+  window.ssGA4ScriptLoaded = false;
+  window.ssAnalyticsEnabled = false;
+  function ssEnableAnalytics() {
+    window.ssAnalyticsEnabled = true;
+    if (window.ssGA4ScriptLoaded) {
+      // Tag is already running (re-accepting after a same-page-view
+      // withdrawal) -- resume it, don't inject a second copy or re-fire config.
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      return;
+    }
+    window.ssGA4ScriptLoaded = true;
     var s = document.createElement('script');
     s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6KS28VD4RE';
@@ -22,8 +35,17 @@
     gtag('js', new Date());
     gtag('config', 'G-6KS28VD4RE', { anonymize_ip: true });
   }
+  function ssDisableAnalytics() {
+    window.ssAnalyticsEnabled = false;
+    // Best-effort ask to an already-loaded tag to stop its own automatic
+    // collection too -- a script already running in the page can't be
+    // forcibly unloaded, so this is defence-in-depth, not the primary
+    // mechanism (the primary mechanism is ssAnalyticsEnabled gating every
+    // one of this site's own event calls -- see trackEvent()).
+    gtag('consent', 'update', { analytics_storage: 'denied' });
+  }
   try {
-    if (localStorage.getItem('ss_analytics_consent') === 'granted') { ssLoadGA4(); }
+    if (localStorage.getItem('ss_analytics_consent') === 'granted') { ssEnableAnalytics(); }
   } catch (e) {}
 </script>
 <title>Gentle Yoga for Headaches, Colds & Everyday Tension — Soul & Selenite</title>
@@ -144,7 +166,7 @@
   </article>
 
   <div class="cta-row">
-    <a class="cta" href="/quiz" onclick="if(window.ssGA4Loaded)gtag('event','guide_to_quiz_click',{guide:'gentle-yoga'});">Take the Free Quiz</a>
+    <a class="cta" href="/quiz" onclick="if(window.ssAnalyticsEnabled)gtag('event','guide_to_quiz_click',{guide:'gentle-yoga'});">Take the Free Quiz</a>
   </div>
 
   <footer class="site-footer card">
@@ -188,22 +210,18 @@
     function showSettingsLink() { banner.hidden = true; settingsLink.hidden = false; }
 
     // Withdrawing consent must be exactly as easy as giving it (ICO guidance):
-    // the same 'Cookie settings' control re-opens this banner at any time.
+    // the same 'Cookie settings' control re-opens this banner at any time,
+    // and works correctly however many times Accept/Necessary only is
+    // clicked in the same page view -- ssEnableAnalytics()/ssDisableAnalytics()
+    // never inject a second copy of the Google script.
     if (accept) accept.onclick = function () {
       try { localStorage.setItem(KEY, 'granted'); } catch (e) {}
-      ssLoadGA4(); // Basic Consent Mode: loads right now, no reload needed.
+      ssEnableAnalytics();
       showSettingsLink();
     };
     if (decline) decline.onclick = function () {
       try { localStorage.setItem(KEY, 'denied'); } catch (e) {}
-      // Stops this site's own event calls immediately (ssGA4Loaded gates
-      // every custom event call). If GA4 was already loaded earlier in this
-      // same page view (a prior Accept, now withdrawn), also tells Google's
-      // tag directly to stop -- best-effort, since a script already running
-      // in the page can't be forcibly unloaded, but this halts its own
-      // further automatic collection too.
-      window.ssGA4Loaded = false;
-      if (typeof gtag === 'function') gtag('consent', 'update', { analytics_storage: 'denied' });
+      ssDisableAnalytics();
       showSettingsLink();
     };
     settingsLink.onclick = showBanner;
