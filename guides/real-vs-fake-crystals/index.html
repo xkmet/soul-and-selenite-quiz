@@ -3,13 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6KS28VD4RE"></script>
+<!-- Google tag (gtag.js) -- Basic Consent Mode: the tag is never requested
+     from Google until the visitor accepts analytics cookies (or a prior
+     "granted" choice is found in localStorage), so no request of any kind
+     reaches Google before consent. Two separate states, deliberately not
+     conflated: ssGA4ScriptLoaded (has the Google script physically been
+     injected -- never reverts once true, since a loaded script can't be
+     unloaded) and ssAnalyticsEnabled (does the visitor CURRENTLY permit
+     analytics -- this is what gates every custom event call, and can flip
+     back and forth as many times as Accept/Necessary only is clicked in
+     one page view). See the Cookie settings control near the end of this
+     page, and projects/crystal-chakra-quiz/context.md. -->
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-6KS28VD4RE');
+  function gtag(){ dataLayer.push(arguments); }
+  window.ssGA4ScriptLoaded = false;
+  window.ssAnalyticsEnabled = false;
+  function ssEnableAnalytics() {
+    window.ssAnalyticsEnabled = true;
+    if (window.ssGA4ScriptLoaded) {
+      // Tag is already running (re-accepting after a same-page-view
+      // withdrawal) -- resume it, don't inject a second copy or re-fire config.
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      return;
+    }
+    window.ssGA4ScriptLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6KS28VD4RE';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', 'G-6KS28VD4RE', { anonymize_ip: true });
+  }
+  function ssDisableAnalytics() {
+    window.ssAnalyticsEnabled = false;
+    if (window.ssGA4ScriptLoaded) {
+      // Only send a consent signal if there is an actual Google tag running
+      // to receive it -- queuing this into dataLayer before the script has
+      // ever loaded would sit ahead of the eventual js/config calls once it
+      // does load (dataLayer is processed in order from the start).
+      // Confirmed via a real network check: without this guard, a same-page
+      // decline-then-accept made Google's own tag report analytics_storage
+      // as denied (gcs=G1-0) on the very first hit, even though
+      // ssAnalyticsEnabled was already true by then.
+      gtag('consent', 'update', { analytics_storage: 'denied' });
+    }
+  }
+  try {
+    if (localStorage.getItem('ss_analytics_consent') === 'granted') { ssEnableAnalytics(); }
+  } catch (e) {}
 </script>
 <title>How to Tell Real Crystals From Fake — Soul & Selenite</title>
 <meta name="description" content="A practical guide to spotting dyed glass, resin, and synthetic crystals — colour, weight, shape, and the scratch test — so you can buy with confidence.">
@@ -95,7 +137,7 @@
   </article>
 
   <div class="cta-row">
-    <a class="cta" href="/quiz">Take the Free Quiz</a>
+    <a class="cta" href="/quiz" onclick="if(window.ssAnalyticsEnabled)gtag('event','guide_to_quiz_click',{guide:'real-vs-fake-crystals'});">Take the Free Quiz</a>
   </div>
 
   <footer class="site-footer card">
@@ -107,5 +149,57 @@
   </footer>
 
 </div>
+<div id="ssCookieBanner" class="ss-cookie-banner" hidden role="dialog" aria-label="Cookie preferences">
+  <p>We use optional analytics cookies to see how visitors use this site, so we can improve it. No quiz answers, names or email addresses are ever included. <a href="/privacy">Learn more</a>.</p>
+  <div class="ss-cookie-actions">
+    <button type="button" id="ssCookieAccept">Accept</button>
+    <button type="button" id="ssCookieDecline">Necessary only</button>
+  </div>
+</div>
+<button type="button" id="ssCookieSettingsLink" class="ss-cookie-settings-link" hidden>Cookie settings</button>
+<style>
+  .ss-cookie-banner{position:relative;max-width:600px;margin:1.6rem auto 0;background:var(--surface);color:var(--ink-strong);border:1px solid var(--sage);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;font-family:'Jost','Century Gothic',sans-serif;font-weight:300;font-size:0.92rem;line-height:1.5;}
+  .ss-cookie-banner p{margin:0 0 12px;}
+  .ss-cookie-banner a{color:var(--sage);}
+  .ss-cookie-actions{display:flex;gap:10px;flex-wrap:wrap;}
+  .ss-cookie-actions button{font-family:inherit;font-weight:400;font-size:0.88rem;padding:8px 16px;border-radius:999px;border:1px solid var(--sage);background:transparent;color:var(--ink-strong);cursor:pointer;}
+  #ssCookieAccept{background:var(--sage);color:var(--surface);border-color:var(--sage);}
+  .ss-cookie-settings-link{display:block;margin:1.4rem auto 0;background:none;border:none;font-family:'Jost','Century Gothic',sans-serif;font-weight:300;font-size:0.78rem;color:var(--ink);opacity:0.6;text-decoration:underline;cursor:pointer;padding:0;}
+  .ss-cookie-settings-link:hover{opacity:1;}
+</style>
+<script>
+(function () {
+  try {
+    var KEY = 'ss_analytics_consent';
+    var banner = document.getElementById('ssCookieBanner');
+    var settingsLink = document.getElementById('ssCookieSettingsLink');
+    var accept = document.getElementById('ssCookieAccept');
+    var decline = document.getElementById('ssCookieDecline');
+    if (!banner || !settingsLink) return;
+
+    function showBanner() { banner.hidden = false; settingsLink.hidden = true; }
+    function showSettingsLink() { banner.hidden = true; settingsLink.hidden = false; }
+
+    // Withdrawing consent must be exactly as easy as giving it (ICO guidance):
+    // the same 'Cookie settings' control re-opens this banner at any time,
+    // and works correctly however many times Accept/Necessary only is
+    // clicked in the same page view -- ssEnableAnalytics()/ssDisableAnalytics()
+    // never inject a second copy of the Google script.
+    if (accept) accept.onclick = function () {
+      try { localStorage.setItem(KEY, 'granted'); } catch (e) {}
+      ssEnableAnalytics();
+      showSettingsLink();
+    };
+    if (decline) decline.onclick = function () {
+      try { localStorage.setItem(KEY, 'denied'); } catch (e) {}
+      ssDisableAnalytics();
+      showSettingsLink();
+    };
+    settingsLink.onclick = showBanner;
+
+    if (localStorage.getItem(KEY)) { showSettingsLink(); } else { showBanner(); }
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
