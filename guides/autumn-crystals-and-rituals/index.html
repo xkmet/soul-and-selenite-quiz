@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="p:domain_verify" content="e7de7f531b17c83e0015ee2e7e240d39"/>
-<meta name="google-site-verification" content="a6W80s6_VCWmRRYxiUmjbOXFsYsKBFgI9mbcQhnBQ7o" />
 <!-- Google tag (gtag.js) -- Basic Consent Mode: the tag is never requested
      from Google until the visitor accepts analytics cookies (or a prior
      "granted" choice is found in localStorage), so no request of any kind
@@ -55,7 +53,8 @@
     if (localStorage.getItem('ss_analytics_consent') === 'granted') { ssEnableAnalytics(); }
   } catch (e) {}
 </script>
-<title>Soul & Selenite — A crystal, a chakra, a yoga practice</title>
+<title>Autumn Crystals, Practices &amp; Intention-Setting — Soul &amp; Selenite</title>
+<meta name="description" content="Six crystals for autumn, a few gentle grounding practices, and a simple equinox reflection — a calm way to meet the turn of the season.">
 <style>
   @font-face {
     font-family: 'Jost';
@@ -77,67 +76,33 @@
 
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--pearl); color: var(--ink-strong); font-family: 'Jost','Century Gothic',sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; }
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 2.5rem; position: relative; }
-  a { color: inherit; }
+  .wrap { max-width: 800px; margin: 0 auto; padding: 0 2.5rem; }
+  a { color: var(--sage); }
 
-  .bg-floral {
-    display: none; /* watercolor background switched off 2026-08-01 at wife's request — re-enable by removing this line */
-    position: fixed; left: 0; right: 0; bottom: 0; width: 100%; height: clamp(200px, 56.25vw, 2400px);
-    background-image: url('/site-assets/watercolor-thistles.png');
-    background-size: cover; background-position: bottom center; background-repeat: no-repeat;
-    mix-blend-mode: multiply; opacity: 0.6; pointer-events: none;
-  }
-  @media (prefers-color-scheme: dark) {
-    .bg-floral { mix-blend-mode: screen; filter: invert(1) hue-rotate(180deg); opacity: 0.22; }
-  }
-  :root[data-theme="dark"] .bg-floral { mix-blend-mode: screen; filter: invert(1) hue-rotate(180deg); opacity: 0.22; }
-  :root[data-theme="light"] .bg-floral { mix-blend-mode: multiply; filter: none; opacity: 0.6; }
+  .card { background: var(--surface); border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--sage); overflow: hidden; }
 
-  .card { background: var(--surface); border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--sage); }
+  @media (max-width: 480px) { .wrap { padding: 0 1.1rem; } }
 
-  .hero { position: relative; text-align: center; padding: 4rem 2.5rem; margin: 2.5rem 0; }
-  .hero svg.mark { width: 58px; height: 76px; margin: 0 auto 1.6rem; display: block; }
-  .wordmark { text-transform: uppercase; letter-spacing: 0.18em; font-size: clamp(2.2rem, 6vw, 3.4rem); font-weight: 300; margin: 0; }
-  .wordmark em { font-style: normal; color: var(--sage); }
-  .rule { width: 110px; height: 1px; background: var(--sage); opacity: 0.6; margin: 1.4rem auto; border: none; }
-  .tagline { font-size: 1.35rem; line-height: 1.6; max-width: 40em; margin: 0 auto 2.6rem; opacity: 0.85; }
+  .back { display: inline-block; font-size: 0.85rem; opacity: 0.75; text-decoration: none; margin: 2.5rem 0 1.5rem; }
+
+  article.card { padding: 3rem 2.8rem 3.5rem; margin: 0 0 2.5rem; }
+  @media (max-width: 480px) { article.card { padding: 2rem 1.4rem 2.5rem; } }
+
+  .eyebrow { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin: 0 0 0.8rem; text-align: center; }
+  h1.title { text-transform: uppercase; letter-spacing: 0.04em; font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 400; margin: 0 0 2rem; text-align: center; line-height: 1.3; }
+  article p.lead { font-size: 1.2rem; line-height: 1.8; opacity: 0.9; margin: 0 0 2.2rem; }
+  article h2 { font-size: 1.3rem; font-weight: 500; margin: 2.6rem 0 0.8rem; color: var(--ink-strong); }
+  article p { font-size: 1.08rem; line-height: 1.8; opacity: 0.88; margin: 0 0 1.2rem; }
+  article ul { margin: 0 0 1.2rem; padding: 0; list-style: none; }
+  article li { font-size: 1.08rem; line-height: 1.8; opacity: 0.88; margin: 0 0 1rem; padding: 0 0 0 1.1rem; border-left: 2px solid var(--line); }
+  article li b { font-weight: 500; color: var(--ink-strong); }
+  article .reflect { margin: 0 0 1.2rem; }
+  article .reflect b { font-weight: 500; color: var(--ink-strong); display: block; margin-bottom: 0.2rem; }
+  article .note { font-size: 0.95rem; line-height: 1.7; opacity: 0.75; border-top: 1px solid var(--line); margin-top: 2.6rem; padding-top: 1.6rem; }
+
+  .cta-row { text-align: center; padding: 0.5rem 0 3rem; }
   .cta { display: inline-block; font-family: inherit; font-weight: 400; font-size: 1.05rem; color: var(--pearl); background: var(--ink-strong); text-decoration: none; padding: 1.1rem 2.6rem; border-radius: 999px; letter-spacing: 0.02em; }
   .cta:hover { opacity: 0.92; }
-
-  @media (max-width: 480px) {
-    .wrap { padding: 0 1.1rem; }
-    .hero { padding: 3rem 1.3rem; }
-    .wordmark { font-size: 1.6rem; letter-spacing: 0.06em; }
-    section.block { padding: 2.5rem 1.3rem; }
-  }
-
-  .crystals-card { overflow: hidden; margin: 0 0 2.5rem; }
-  .crystals-card img { display: block; width: 100%; height: auto; }
-  .crystals-caption { padding: 2.2rem 2.5rem 2.6rem; text-align: center; }
-  .crystals-caption p.body { font-size: 1.1rem; line-height: 1.7; opacity: 0.85; max-width: 36em; margin: 0.6rem auto 0; }
-  @media (max-width: 480px) { .crystals-caption { padding: 1.8rem 1.3rem 2.2rem; } }
-
-  section.block { padding: 3.5rem 2.5rem; margin: 0 0 2.5rem; }
-  .eyebrow { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin: 0 0 0.8rem; text-align: center; }
-  h2.title { text-transform: uppercase; letter-spacing: 0.06em; font-size: 1.9rem; font-weight: 400; margin: 0 0 2.6rem; text-align: center; }
-
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
-  @media (max-width: 640px) { .steps { grid-template-columns: 1fr; } }
-  .step { text-align: center; }
-  .step .num { font-family: inherit; font-size: 0.85rem; letter-spacing: 0.1em; color: var(--sage); margin: 0 0 0.7rem; }
-  .step h3 { font-size: 1.3rem; font-weight: 400; margin: 0 0 0.7rem; }
-  .step p { font-size: 1.05rem; line-height: 1.6; opacity: 0.8; margin: 0; }
-
-  .story { text-align: center; max-width: 42em; margin: 0 auto; }
-  .story p { font-size: 1.2rem; line-height: 1.8; opacity: 0.88; margin: 0 0 1.4rem; }
-
-  .guides { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.6rem; }
-  @media (max-width: 640px) { .guides { grid-template-columns: 1fr; } }
-  .guide-link { display: block; text-decoration: none; color: inherit; background: var(--pearl); border: 1px solid var(--line); border-radius: 14px; padding: 1.6rem 1.7rem; }
-  .guide-link:hover { border-color: var(--sage); }
-  .guide-link .eyebrow { text-align: left; margin-bottom: 0.5rem; }
-  .guide-link h3 { font-size: 1.15rem; font-weight: 500; margin: 0 0 0.5rem; }
-  .guide-link p { font-size: 0.95rem; line-height: 1.6; opacity: 0.8; margin: 0; }
 
   footer.site-footer { text-align: center; padding: 1.6rem 2rem; margin: 0 0 2.5rem; font-size: 0.8rem; opacity: 0.75; }
   footer.site-footer a { text-decoration: underline; }
@@ -147,86 +112,52 @@
 </head>
 <body>
 
-<div class="bg-floral" aria-hidden="true"></div>
-
 <div class="wrap">
 
-  <div class="hero card">
-    <svg class="mark" viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M50,15 L58,38 L55,112 L50,124 L45,112 L42,38 Z" stroke="var(--ink-strong)" stroke-width="1.4" stroke-linejoin="round"/>
-      <path d="M24,48 L30,64 L28,104 L24,112 L20,104 L18,64 Z" stroke="var(--ink-strong)" stroke-width="1.2" stroke-linejoin="round" opacity="0.75"/>
-      <path d="M76,52 L81,66 L79,100 L76,108 L73,100 L71,66 Z" stroke="var(--ink-strong)" stroke-width="1.2" stroke-linejoin="round" opacity="0.75"/>
-    </svg>
-    <h1 class="wordmark">Soul<em>&amp;</em>Selenite</h1>
-    <hr class="rule">
-    <p class="tagline">A crystal, a chakra, a yoga practice — matched to exactly where you are. Answer a few honest questions, and we'll send you a full personal reading, free.</p>
-    <a class="cta" href="/quiz">Take the Free Quiz</a>
-  </div>
+  <a class="back" href="/">&larr; Back to Soul &amp; Selenite</a>
 
-  <div class="card crystals-card">
-    <img src="/site-assets/crystal-flatlay.png" alt="A row of real healing crystals: rose quartz, citrine, clear quartz, black tourmaline and selenite" loading="lazy">
-    <div class="crystals-caption">
-      <p class="eyebrow">What we work with</p>
-      <h2 class="title" style="margin-bottom:0;">Real crystals, real correspondence</h2>
-      <p class="body">Every reading points you toward one of 35 real crystals — matched by chakra.</p>
-    </div>
-  </div>
+  <article class="card">
+    <p class="eyebrow">Seasonal</p>
+    <h1 class="title">Getting Ready for Autumn</h1>
+    <p class="lead">The light changes first — lower, softer, gold instead of white. Then the mornings cool, and something in us wants to slow down, gather in, and tidy up the year so far. This is a gentle guide to meeting that shift on purpose: a few crystals that suit the season, some simple practices, and a short reflection for the equinox.</p>
 
-  <section class="block card">
-    <p class="eyebrow">How it works</p>
-    <h2 class="title">Three steps</h2>
-    <div class="steps">
-      <div class="step">
-        <p class="num">01</p>
-        <h3>Answer honestly</h3>
-        <p>A few short questions about how you're actually feeling right now.</p>
-      </div>
-      <div class="step">
-        <p class="num">02</p>
-        <h3>Get matched</h3>
-        <p>One of 35 crystals, chosen for your specific situation.</p>
-      </div>
-      <div class="step">
-        <p class="num">03</p>
-        <h3>Receive your reading</h3>
-        <p>Your crystal, its chakra, and a short yoga practice — sent straight to your inbox, free.</p>
-      </div>
-    </div>
-  </section>
+    <h2>What autumn asks of us</h2>
+    <p>Autumn is a season of letting go — trees do it visibly, dropping what they no longer need so they can rest through winter. The autumn equinox, around 22&ndash;23 September each year (in 2026 it falls on 23 September), is the point when day and night are the same length, just before the dark half of the year takes over. Modern pagan tradition calls it Mabon and treats it as a harvest festival; the equinox itself has been marked far longer than that name has.</p>
+    <p>You don't have to believe any of that for the season to be a useful prompt. Most of us reset a little in September anyway — it's the back-to-school feeling that never quite leaves. This is just a way to do it deliberately rather than letting it happen to you.</p>
 
-  <section class="block card">
-    <p class="eyebrow">Why this exists</p>
-    <h2 class="title">Prescriptive, not intuitive</h2>
-    <div class="story">
-      <p>Choosing a crystal usually means relying on whatever you're drawn to in the moment — dowsing over a handful of stones, or waiting for one to catch your eye. But that takes time, and some days nothing quite calls out to you. This quiz works the other way round: a few honest questions do the noticing for you, matching you to the crystal you actually need, whether or not you'd have reached for it yourself.</p>
-      <p>Every result is grounded in real chakra correspondence, paired with a short yoga practice to work with your energy flow.</p>
-    </div>
-  </section>
+    <h2>Six crystals for autumn</h2>
+    <p>None of these are seasonal in a literal sense — a stone doesn't know what month it is. But each one carries a quality that tends to matter more as the year turns inward, and picking something to focus on is half the point of working with crystals at all.</p>
+    <ul>
+      <li><b>Smoky Quartz — for letting go.</b> A soft, smoky-grey quartz traditionally used for releasing what you're carrying: old patterns, low-level stress, the residue of a hard few months. The obvious choice for a season that's all about shedding.</li>
+      <li><b>Hematite — for coming back down to earth.</b> Genuinely heavy and cool in the hand — it's an iron ore. A grounding stone for pulling your attention back into your body on the days the shorter light leaves you scattered.</li>
+      <li><b>Black Tourmaline — for drawing your boundaries.</b> As the nights close in and everyone retreats indoors, this is the classic protective stone — the one people keep by the door or on a desk as a quiet "not today" to other people's moods.</li>
+      <li><b>Citrine — for gratitude and the second harvest.</b> Bright and warm, long associated with abundance. Mabon is a harvest festival, and citrine suits the part of autumn that's about noticing what you've gathered, not only what you've lost.</li>
+      <li><b>Amber — for gathered wisdom.</b> Not strictly a crystal — it's fossilised tree resin, often tens of millions of years old, which is a fittingly autumnal thing to hold. Warm, golden, and traditionally a stone of patience and slow, considered decisions.</li>
+      <li><b>Amethyst — for turning inward.</b> Deep violet and calming, a stone for a quieter mind. Good company for the reflective, slightly hibernatory mood that shows up once the clocks go back.</li>
+    </ul>
+    <p>If you're buying any of these, our guide to <a href="/guides/real-vs-fake-crystals">telling real crystals from fake</a> covers the checks worth doing first.</p>
 
-  <section class="block card">
-    <p class="eyebrow">Go deeper</p>
-    <h2 class="title">Guides</h2>
-    <div class="guides">
-      <a class="guide-link" href="/guides/autumn-crystals-and-rituals">
-        <p class="eyebrow">Seasonal</p>
-        <h3>Getting Ready for Autumn</h3>
-        <p>Six crystals for the season, a few gentle practices, and a simple equinox reflection.</p>
-      </a>
-      <a class="guide-link" href="/guides/real-vs-fake-crystals">
-        <p class="eyebrow">Crystal care</p>
-        <h3>How to Tell Real Crystals From Fake</h3>
-        <p>Colour, weight, shape, and the scratch test — four honest checks before you buy.</p>
-      </a>
-      <a class="guide-link" href="/guides/gentle-yoga">
-        <p class="eyebrow">Gentle practice</p>
-        <h3>Gentle Yoga for Headaches, Colds &amp; Tension</h3>
-        <p>Simple, beginner-safe poses for the days you just don't feel quite right.</p>
-      </a>
-    </div>
-  </section>
+    <h2>A few gentle practices</h2>
+    <p>Autumn is a good time to move a little more slowly and closer to the ground. These are all beginner-safe and need nothing but a bit of floor space.</p>
+    <ul>
+      <li><b>Child's Pose</b> — kneel, sit back on your heels, and fold forward with your forehead resting down. The most literal "turn inward" pose there is. A cushion under your forehead or chest if that's more comfortable.</li>
+      <li><b>Standing forward fold</b> — feet hip-width, soft knees, fold from the hips and let your head and arms hang. A gentle, gravity-assisted way to release tension you've been holding in your back and shoulders. Come up slowly.</li>
+      <li><b>Legs-Up-The-Wall</b> — lie on your back with your legs resting up a wall, arms relaxed at your sides. Quietly restorative, and it asks nothing of you — ideal for the evenings your energy drops early.</li>
+      <li><b>A slow Cat-Cow</b> — on hands and knees, alternately arch and round your spine with your breath. Warms up the whole back of the body without any strain.</li>
+    </ul>
+    <p>There's more in our <a href="/guides/gentle-yoga">gentle yoga guide</a>, with a short video tutorial for each pose. Keep all of it soft — no strong twists, deep backbends, or inversions. If something doesn't feel right, stop.</p>
 
-  <div style="text-align:center; padding: 3rem 0;">
-    <a class="cta" href="/quiz">Take the Free Quiz</a>
+    <h2>A simple equinox reflection</h2>
+    <p>The equinox is a natural checkpoint — you're two-thirds of the way through the year, with a clear pause before winter. You don't need anything for this beyond ten quiet minutes and something to write with.</p>
+    <p class="reflect"><b>Look back.</b> What has this year actually given you so far? Name a few things — a skill, a friendship, a lesson, a habit that stuck. This is the harvest part, and most people walk straight past it.</p>
+    <p class="reflect"><b>Let something go.</b> What are you ready to stop carrying into the darker months? Write it down plainly. You don't need to burn it or bury it — naming it is the practical bit. If you like a small ritual, fold the paper away somewhere out of sight until spring.</p>
+    <p class="reflect"><b>Set one gentle intention.</b> Not a goal — an intention, and ideally one that fits the season. "Rest without guilt." "Cook properly again." "Be in bed by eleven." Autumn intentions work best when they're about slowing down, not speeding up.</p>
+
+    <p class="note">This is a guide for reflection and seasonal ritual, not therapy or medical advice — crystals aren't a substitute for care you actually need. Take what's useful and leave the rest. (We use "autumn" throughout; "fall" is the same season. If you're in the southern hemisphere, save this one for March.)</p>
+  </article>
+
+  <div class="cta-row">
+    <a class="cta" href="/quiz" onclick="if(window.ssAnalyticsEnabled)gtag('event','guide_to_quiz_click',{guide:'autumn-crystals-and-rituals'});">Take the Free Quiz</a>
   </div>
 
   <footer class="site-footer card">
