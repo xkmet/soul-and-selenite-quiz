@@ -136,7 +136,6 @@
   .reading .lede .crystal-icon { width: 52px; height: 52px; margin: 0; flex-shrink: 0; }
   .reading .lede h2 { font-size: 1.6rem; font-weight: 400; margin: 0 0 0.3rem; }
   .reading .lede p { font-size: 0.85rem; opacity: 0.7; margin: 0; }
-  .reading .demo-note { font-size: 0.75rem; opacity: 0.55; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 0.6rem 0.9rem; margin-bottom: 1.6rem; line-height: 1.5; }
   .reading h3 { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); margin: 1.6rem 0 0.6rem; }
   .reading h3:first-of-type { margin-top: 0; }
   .reading p.body-text { font-size: 0.92rem; line-height: 1.65; margin: 0; opacity: 0.9; }
@@ -712,7 +711,6 @@ function renderReading(card) {
         ${crystalIconSVG(state.crystal, 'crystal-icon')}
         <div><h2>${state.crystal}</h2><p>${title}</p></div>
       </div>
-      <div class="demo-note">This is what unlocks after the £6.99 report — showing it directly here for now since payment isn't connected yet.</div>
       <h3>Your Crystal</h3>
       <p class="body-text">${CRYSTAL_BLURB[state.crystal]}</p>
       <h3>Your Chakra</h3>
