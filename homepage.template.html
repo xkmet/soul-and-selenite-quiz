@@ -131,7 +131,7 @@
   .story { text-align: center; max-width: 42em; margin: 0 auto; }
   .story p { font-size: 1.2rem; line-height: 1.8; opacity: 0.88; margin: 0 0 1.4rem; }
 
-  .guides { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.6rem; }
+  .guides { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.6rem; }
   @media (max-width: 640px) { .guides { grid-template-columns: 1fr; } }
   .guide-link { display: block; text-decoration: none; color: inherit; background: var(--pearl); border: 1px solid var(--line); border-radius: 14px; padding: 1.6rem 1.7rem; }
   .guide-link:hover { border-color: var(--sage); }
@@ -207,6 +207,11 @@
     <p class="eyebrow">Go deeper</p>
     <h2 class="title">Guides</h2>
     <div class="guides">
+      <a class="guide-link" href="/guides/autumn-crystals-and-rituals">
+        <p class="eyebrow">Seasonal</p>
+        <h3>Getting Ready for Autumn</h3>
+        <p>Six crystals for the season, a few gentle practices, and a simple equinox reflection.</p>
+      </a>
       <a class="guide-link" href="/guides/real-vs-fake-crystals">
         <p class="eyebrow">Crystal care</p>
         <h3>How to Tell Real Crystals From Fake</h3>

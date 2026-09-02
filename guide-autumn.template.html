@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google tag (gtag.js) -- Basic Consent Mode: the tag is never requested
+     from Google until the visitor accepts analytics cookies (or a prior
+     "granted" choice is found in localStorage), so no request of any kind
+     reaches Google before consent. Two separate states, deliberately not
+     conflated: ssGA4ScriptLoaded (has the Google script physically been
+     injected -- never reverts once true, since a loaded script can't be
+     unloaded) and ssAnalyticsEnabled (does the visitor CURRENTLY permit
+     analytics -- this is what gates every custom event call, and can flip
+     back and forth as many times as Accept/Necessary only is clicked in
+     one page view). See the Cookie settings control near the end of this
+     page, and projects/crystal-chakra-quiz/context.md. -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  window.ssGA4ScriptLoaded = false;
+  window.ssAnalyticsEnabled = false;
+  function ssEnableAnalytics() {
+    window.ssAnalyticsEnabled = true;
+    if (window.ssGA4ScriptLoaded) {
+      // Tag is already running (re-accepting after a same-page-view
+      // withdrawal) -- resume it, don't inject a second copy or re-fire config.
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      return;
+    }
+    window.ssGA4ScriptLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6KS28VD4RE';
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', 'G-6KS28VD4RE', { anonymize_ip: true });
+  }
+  function ssDisableAnalytics() {
+    window.ssAnalyticsEnabled = false;
+    if (window.ssGA4ScriptLoaded) {
+      // Only send a consent signal if there is an actual Google tag running
+      // to receive it -- queuing this into dataLayer before the script has
+      // ever loaded would sit ahead of the eventual js/config calls once it
+      // does load (dataLayer is processed in order from the start).
+      // Confirmed via a real network check: without this guard, a same-page
+      // decline-then-accept made Google's own tag report analytics_storage
+      // as denied (gcs=G1-0) on the very first hit, even though
+      // ssAnalyticsEnabled was already true by then.
+      gtag('consent', 'update', { analytics_storage: 'denied' });
+    }
+  }
+  try {
+    if (localStorage.getItem('ss_analytics_consent') === 'granted') { ssEnableAnalytics(); }
+  } catch (e) {}
+</script>
+<title>Autumn Crystals, Practices &amp; Intention-Setting — Soul &amp; Selenite</title>
+<meta name="description" content="Six crystals for autumn, a few gentle grounding practices, and a simple equinox reflection — a calm way to meet the turn of the season.">
+<style>
+  @font-face {
+    font-family: 'Jost';
+    font-style: normal;
+    font-weight: 300 600;
+    font-display: swap;
+    src: url(data:font/woff2;base64,__JOST_B64__) format('woff2');
+  }
+  :root {
+    --pearl: #E9E2D6; --surface: #FFFFFF; --ink: #625C56; --ink-strong: #3D3A36;
+    --sage: #77835E; --pink: #DDB9BB; --line: #D8CFBE;
+    --shadow: 0 1px 2px rgba(61,58,54,0.05), 0 8px 24px rgba(61,58,54,0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --pearl:#221F1C; --surface:#2B2724; --ink:#C9C2BA; --ink-strong:#ECE5DE; --sage:#98A37E; --pink:#E4C3C5; --line:#423D38; --shadow:0 1px 2px rgba(0,0,0,0.3),0 8px 24px rgba(0,0,0,0.3); }
+  }
+  :root[data-theme="dark"] { --pearl:#221F1C; --surface:#2B2724; --ink:#C9C2BA; --ink-strong:#ECE5DE; --sage:#98A37E; --pink:#E4C3C5; --line:#423D38; --shadow:0 1px 2px rgba(0,0,0,0.3),0 8px 24px rgba(0,0,0,0.3); }
+  :root[data-theme="light"] { --pearl:#E9E2D6; --surface:#FFFFFF; --ink:#625C56; --ink-strong:#3D3A36; --sage:#77835E; --pink:#DDB9BB; --line:#D8CFBE; --shadow:0 1px 2px rgba(61,58,54,0.05),0 8px 24px rgba(61,58,54,0.06); }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--pearl); color: var(--ink-strong); font-family: 'Jost','Century Gothic',sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 2.5rem; }
+  a { color: var(--sage); }
+
+  .card { background: var(--surface); border-radius: 20px; box-shadow: var(--shadow); border: 1px solid var(--sage); overflow: hidden; }
+
+  @media (max-width: 480px) { .wrap { padding: 0 1.1rem; } }
+
+  .back { display: inline-block; font-size: 0.85rem; opacity: 0.75; text-decoration: none; margin: 2.5rem 0 1.5rem; }
+
+  article.card { padding: 3rem 4rem 3.5rem; margin: 0 0 2.5rem; }
+  @media (max-width: 480px) { article.card { padding: 2rem 1.4rem 2.5rem; } }
+
+  .guide-image { display: block; width: calc(100% + 8rem); margin: -3rem -4rem 2.4rem; }
+  @media (max-width: 480px) { .guide-image { width: calc(100% + 2.8rem); margin: -2rem -1.4rem 1.8rem; } }
+
+  .eyebrow { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin: 0 0 0.8rem; text-align: center; }
+  h1.title { text-transform: uppercase; letter-spacing: 0.04em; font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 400; margin: 0 0 2rem; text-align: center; line-height: 1.3; }
+  article p.lead { font-size: 1.2rem; line-height: 1.8; opacity: 0.9; margin: 0 0 2.2rem; }
+  article h2 { font-size: 1.3rem; font-weight: 500; margin: 2.6rem 0 0.8rem; color: var(--ink-strong); }
+  article p { font-size: 1.08rem; line-height: 1.8; opacity: 0.88; margin: 0 0 1.2rem; }
+  article ul { margin: 0 0 1.2rem; padding: 0; list-style: none; }
+  article li { font-size: 1.08rem; line-height: 1.8; opacity: 0.88; margin: 0 0 1rem; padding: 0 0 0 1.1rem; border-left: 2px solid var(--line); }
+  article li b { font-weight: 500; color: var(--ink-strong); }
+  .section-image { display: block; width: calc(100% + 8rem); margin: 0.6rem -4rem 0.7rem; }
+  @media (max-width: 480px) { .section-image { width: calc(100% + 2.8rem); margin: 0.5rem -1.4rem 0.6rem; } }
+  .img-caption { font-size: 0.85rem; line-height: 1.6; opacity: 0.7; margin: 0 0 2rem; text-align: center; }
+  article .reflect { margin: 0 0 1.2rem; }
+  article .reflect b { font-weight: 500; color: var(--ink-strong); display: block; margin-bottom: 0.2rem; }
+  article .note { font-size: 0.95rem; line-height: 1.7; opacity: 0.75; border-top: 1px solid var(--line); margin-top: 2.6rem; padding-top: 1.6rem; }
+
+  .cta-row { text-align: center; padding: 0.5rem 0 3rem; }
+  .cta { display: inline-block; font-family: inherit; font-weight: 400; font-size: 1.05rem; color: var(--pearl); background: var(--ink-strong); text-decoration: none; padding: 1.1rem 2.6rem; border-radius: 999px; letter-spacing: 0.02em; }
+  .cta:hover { opacity: 0.92; }
+
+  footer.site-footer { text-align: center; padding: 1.6rem 2rem; margin: 0 0 2.5rem; font-size: 0.8rem; opacity: 0.75; }
+  footer.site-footer a { text-decoration: underline; }
+  footer.site-footer .links { margin-top: 0.6rem; }
+  footer.site-footer .links a { margin: 0 0.6rem; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <a class="back" href="/">&larr; Back to Soul &amp; Selenite</a>
+
+  <article class="card">
+    <img class="guide-image" src="/site-assets/guide-autumn.png" alt="A warm autumn still-life: a folded textile with a bohemian block-print pattern in terracotta, rust and sage, beside a lit candle, dried seedheads, a sprig of eucalyptus and a few fallen leaves on pale wood in low golden light" loading="lazy">
+    <p class="eyebrow">Seasonal</p>
+    <h1 class="title">Getting Ready for Autumn</h1>
+    <p class="lead">The light changes first — lower, softer, gold instead of white. Then the mornings cool, and something in us wants to slow down, gather in, and tidy up the year so far. This is a gentle guide to meeting that shift on purpose: a few crystals that suit the season, some simple practices, and a short reflection for the equinox.</p>
+
+    <h2>What autumn asks of us</h2>
+    <p>Autumn is a season of letting go — trees do it visibly, dropping what they no longer need so they can rest through winter. The autumn equinox, around 22&ndash;23 September each year (in 2026 it falls on 23 September), is the point when day and night are the same length, just before the dark half of the year takes over. Modern pagan tradition calls it Mabon and treats it as a harvest festival; the equinox itself has been marked far longer than that name has.</p>
+
+    <h2>Six crystals for autumn</h2>
+    <img class="section-image" src="/site-assets/autumn-crystals.png" alt="A row of real crystals in warm light — smoky quartz, hematite, black tourmaline, citrine, amber and amethyst" loading="lazy">
+    <p class="img-caption">Smoky quartz, hematite, black tourmaline, citrine, amber and amethyst.</p>
+    <ul>
+      <li><b>Smoky Quartz — for letting go.</b> A soft, smoky-grey quartz traditionally used for releasing what you're carrying: old patterns, low-level stress, the residue of a hard few months. The obvious choice for a season that's all about shedding.</li>
+      <li><b>Hematite — for coming back down to earth.</b> Genuinely heavy and cool in the hand — it's an iron ore. A grounding stone for pulling your attention back into your body on the days the shorter light leaves you scattered.</li>
+      <li><b>Black Tourmaline — for drawing your boundaries.</b> As the nights close in and everyone retreats indoors, this is the classic protective stone — the one people keep by the door or on a desk as a quiet "not today" to other people's moods.</li>
+      <li><b>Citrine — for gratitude and the second harvest.</b> Bright and warm, long associated with abundance. Mabon is a harvest festival, and citrine suits the part of autumn that's about noticing what you've gathered, not only what you've lost.</li>
+      <li><b>Amber — for gathered wisdom.</b> Not strictly a crystal — it's fossilised tree resin, often tens of millions of years old, which is a fittingly autumnal thing to hold. Warm, golden, and traditionally a stone of patience and slow, considered decisions.</li>
+      <li><b>Amethyst — for turning inward.</b> Deep violet and calming, a stone for a quieter mind. Good company for the reflective, slightly hibernatory mood that shows up once the clocks go back.</li>
+    </ul>
+    <p>If you're buying any of these, our guide to <a href="/guides/real-vs-fake-crystals">telling real crystals from fake</a> covers the checks worth doing first.</p>
+
+    <h2>A few suggested poses</h2>
+    <p>Autumn is a good time to move a little more slowly and closer to the ground. These are all beginner-safe and need nothing but a bit of floor space.</p>
+    <ul>
+      <li><b>Mountain Pose</b> — stand tall with your feet hip-width and your weight even, arms relaxed at your sides. The most literal "rooting down" pose there is; a steady way to begin, feeling the floor properly under you.</li>
+      <li><b>Tree Pose</b> — balance on one foot with the other resting against your calf or inner thigh (not the knee), a hand on a wall if you want it. A pose about staying rooted while everything around you is changing.</li>
+      <li><b>Yogi Squat</b> — feet a little wider than your hips, sink into a low squat with your heels down (a folded blanket under your heels if they lift), palms together at your chest. Hips heavy toward the floor — deeply grounding.</li>
+      <li><b>Seated forward fold</b> — sit with your legs out in front and fold gently forward from the hips, bending your knees as much as you like. A quiet, inward fold, done from already sitting on the ground.</li>
+    </ul>
+    <p>There's a companion <a href="/guides/gentle-yoga">gentle yoga guide</a> with short video tutorials for a few more poses. Keep all of it soft — no strong twists, deep backbends, or inversions. If something doesn't feel right, stop.</p>
+
+    <h2>A simple equinox reflection</h2>
+    <img class="section-image" src="/site-assets/autumn-equinox.png" alt="An open blank notebook and pen on a pale wooden table, a lit candle and scattered autumn leaves beside it in warm low light" loading="lazy">
+    <p>The equinox is a natural checkpoint — you're two-thirds of the way through the year, with a clear pause before winter. You don't need anything for this beyond ten quiet minutes and something to write with.</p>
+    <p class="reflect"><b>Look back.</b> What has this year actually given you so far? Name a few things — a skill, a friendship, a lesson, a habit that stuck. This is the harvest part, and most people walk straight past it.</p>
+    <p class="reflect"><b>Let something go.</b> What are you ready to stop carrying into the darker months? Write it down plainly. You don't need to burn it or bury it — naming it is the practical bit. If you like a small ritual, fold the paper away somewhere out of sight until spring.</p>
+    <p class="reflect"><b>Set one gentle intention.</b> Not a goal — an intention, and ideally one that fits the season. "Rest without guilt." "Cook properly again." "Be in bed by eleven." Autumn intentions work best when they're about slowing down, not speeding up.</p>
+
+    <p class="note">This is a guide for reflection and seasonal ritual, not therapy or medical advice — crystals aren't a substitute for care you actually need. Take what's useful and leave the rest. (We use "autumn" throughout; "fall" is the same season. If you're in the southern hemisphere, save this one for March.)</p>
+  </article>
+
+  <div class="cta-row">
+    <a class="cta" href="/quiz" onclick="if(window.ssAnalyticsEnabled)gtag('event','guide_to_quiz_click',{guide:'autumn-crystals-and-rituals'});">Take the Free Quiz</a>
+  </div>
+
+  <footer class="site-footer card">
+    <div>&copy; 2026 Soul &amp; Selenite</div>
+    <div class="links">
+      <a href="/privacy">Privacy Policy</a>
+      <a href="mailto:soulandselenite@gmail.com">Contact</a>
+    </div>
+  </footer>
+
+</div>
+<div id="ssCookieBanner" class="ss-cookie-banner" hidden role="dialog" aria-label="Cookie preferences">
+  <p>We use optional analytics cookies to see how visitors use this site, so we can improve it. No quiz answers, names or email addresses are ever included. <a href="/privacy">Learn more</a>.</p>
+  <div class="ss-cookie-actions">
+    <button type="button" id="ssCookieAccept">Accept</button>
+    <button type="button" id="ssCookieDecline">Necessary only</button>
+  </div>
+</div>
+<button type="button" id="ssCookieSettingsLink" class="ss-cookie-settings-link" hidden>Cookie settings</button>
+<style>
+  .ss-cookie-banner{position:fixed;left:1rem;right:1rem;bottom:1rem;max-width:600px;margin:0 auto;z-index:9999;background:var(--surface);color:var(--ink-strong);border:1px solid var(--sage);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;font-family:'Jost','Century Gothic',sans-serif;font-weight:300;font-size:0.92rem;line-height:1.5;}
+  body.ss-cookie-banner-open{padding-bottom:200px;}
+  @media(min-width:600px){body.ss-cookie-banner-open{padding-bottom:132px;}}
+  .ss-cookie-banner p{margin:0 0 12px;}
+  .ss-cookie-banner a{color:var(--sage);}
+  .ss-cookie-actions{display:flex;gap:10px;flex-wrap:wrap;}
+  .ss-cookie-actions button{font-family:inherit;font-weight:400;font-size:0.88rem;padding:8px 16px;border-radius:999px;border:1px solid var(--sage);background:transparent;color:var(--ink-strong);cursor:pointer;}
+  #ssCookieAccept{background:var(--sage);color:var(--surface);border-color:var(--sage);}
+  .ss-cookie-settings-link{display:block;margin:1.4rem auto 0;background:none;border:none;font-family:'Jost','Century Gothic',sans-serif;font-weight:300;font-size:0.78rem;color:var(--ink);opacity:0.6;text-decoration:underline;cursor:pointer;padding:0;}
+  .ss-cookie-settings-link:hover{opacity:1;}
+  .ss-cookie-settings-link[hidden]{display:none;}
+</style>
+<script>
+(function () {
+  try {
+    var KEY = 'ss_analytics_consent';
+    var banner = document.getElementById('ssCookieBanner');
+    var settingsLink = document.getElementById('ssCookieSettingsLink');
+    var accept = document.getElementById('ssCookieAccept');
+    var decline = document.getElementById('ssCookieDecline');
+    if (!banner || !settingsLink) return;
+
+    function showBanner() { banner.hidden = false; settingsLink.hidden = true; try { document.body.classList.add('ss-cookie-banner-open'); } catch (e) {} }
+    function showSettingsLink() { banner.hidden = true; settingsLink.hidden = false; try { document.body.classList.remove('ss-cookie-banner-open'); } catch (e) {} }
+
+    // Withdrawing consent must be exactly as easy as giving it (ICO guidance):
+    // the same 'Cookie settings' control re-opens this banner at any time,
+    // and works correctly however many times Accept/Necessary only is
+    // clicked in the same page view -- ssEnableAnalytics()/ssDisableAnalytics()
+    // never inject a second copy of the Google script.
+    if (accept) accept.onclick = function () {
+      try { localStorage.setItem(KEY, 'granted'); } catch (e) {}
+      ssEnableAnalytics();
+      showSettingsLink();
+    };
+    if (decline) decline.onclick = function () {
+      try { localStorage.setItem(KEY, 'denied'); } catch (e) {}
+      ssDisableAnalytics();
+      showSettingsLink();
+    };
+    settingsLink.onclick = showBanner;
+
+    if (localStorage.getItem(KEY)) { showSettingsLink(); } else { showBanner(); }
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
