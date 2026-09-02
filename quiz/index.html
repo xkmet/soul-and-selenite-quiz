@@ -171,13 +171,24 @@
 
 <script>
 const CHAKRA_LINE = {
-  root: "This connects to your Root Chakra — the seat of safety and stability, asking for a little more ground beneath you right now.",
-  sacral: "This connects to your Sacral Chakra — the seat of feeling, creativity, and flow, asking to be let back in.",
-  solar: "This connects to your Solar Plexus Chakra — the seat of confidence and personal power, asking you to trust yourself again.",
-  heart: "This connects to your Heart Chakra — the seat of love and connection, open, a little guarded, ready to soften.",
-  throat: "This connects to your Throat Chakra — the seat of truth and self-expression, asking to be heard.",
-  thirdeye: "This connects to your Third Eye Chakra — the seat of clarity and intuition, asking you to trust what you already sense.",
-  crown: "This connects to your Crown Chakra — the seat of meaning and connection to something bigger, asking for a little more stillness."
+  heal: {
+    root: "This connects to your Root Chakra — the seat of safety and stability, asking for a little more ground beneath you right now.",
+    sacral: "This connects to your Sacral Chakra — the seat of feeling, creativity and flow, asking to be let back in.",
+    solar: "This connects to your Solar Plexus Chakra — the seat of confidence and personal power, asking you to trust yourself again.",
+    heart: "This connects to your Heart Chakra — the seat of love and connection: open, a little guarded, ready to soften.",
+    throat: "This connects to your Throat Chakra — the seat of truth and self-expression, asking to be heard.",
+    thirdeye: "This connects to your Third Eye Chakra — the seat of clarity and intuition, asking you to trust what you already sense.",
+    crown: "This connects to your Crown Chakra — the seat of meaning and connection to something bigger, asking for a little more stillness."
+  },
+  amplify: {
+    root: "This connects to your Root Chakra — the seat of safety and stability, the steady ground you're building from.",
+    sacral: "This connects to your Sacral Chakra — the seat of feeling, creativity and flow, wide open right now.",
+    solar: "This connects to your Solar Plexus Chakra — the seat of confidence and personal power, lit up and ready to act.",
+    heart: "This connects to your Heart Chakra — the seat of love and connection, generous and open right now.",
+    throat: "This connects to your Throat Chakra — the seat of truth and self-expression, ready to be used.",
+    thirdeye: "This connects to your Third Eye Chakra — the seat of clarity and intuition, sharp and clear right now.",
+    crown: "This connects to your Crown Chakra — the seat of meaning and connection to something bigger — and you can feel it."
+  }
 };
 
 const SIGNPOSTS = {
@@ -243,7 +254,7 @@ const CRYSTAL_COLOR = {
 // Full-reading content, shared per chakra + all 35 crystal blurbs.
 const READING = {
   root: {
-    paragraph: "Your Root Chakra is about safety, stability, and feeling like the ground beneath you is solid — money, home, trust, the basics of feeling okay. When it's asking for attention, it usually shows up as a low hum of anxiety about things falling apart, even when, on paper, they're fine.",
+    paragraph: { heal: "Your Root Chakra is about safety, stability, and feeling like the ground beneath you is solid — money, home, trust, the basics of feeling okay. When it's asking for attention, it usually shows up as a low hum of anxiety about things falling apart, even when, on paper, they're fine.", amplify: "Your Root Chakra is about safety, stability, and feeling like the ground beneath you is solid — money, home, trust, the basics of feeling okay. When it's strong, you feel settled and secure enough to take a risk, start something, or dig in for the long haul." },
     supporting: [["Obsidian","for facing what's beneath the surface","#544E49","#302B27"],["Bloodstone","for courage and vitality","#4F6B4E","#324A31"]],
     poses: {
       new: [["Mountain Pose","stand tall, feet grounded, arms at your sides — do this anywhere, even 30 seconds"],["Child's Pose","kneel, sit back on your heels, fold forward — cushion between thighs and calves for support"],["Tree Pose","balance on one foot, other resting on your calf or inner thigh — keep a hand on a wall"]],
@@ -253,7 +264,7 @@ const READING = {
     affirmation: "I am safe. I am supported. I have everything I need."
   },
   sacral: {
-    paragraph: "Your Sacral Chakra governs feeling, creativity, and pleasure — the parts of you that make life feel alive rather than just managed. When it's blocked, things can start to feel flat, numb, or like you're just going through the motions.",
+    paragraph: { heal: "Your Sacral Chakra governs feeling, creativity, and pleasure — the parts of you that make life feel alive rather than just managed. When it's blocked, things can start to feel flat, numb, or like you're just going through the motions.", amplify: "Your Sacral Chakra governs feeling, creativity and pleasure — the parts of you that make life feel alive rather than just managed. When it's flowing, ideas come easily, you're open to enjoyment, and making things feels light." },
     supporting: [["Mahogany Obsidian","for steady, grounded creativity","#6B4A3C","#432D24"]],
     poses: {
       new: [["Bound Angle Pose","soles of feet together, knees open — sit on a cushion, blocks under knees if tight"],["Cat-Cow","hands and knees, alternate arching and rounding with your breath"],["Pigeon Pose","one knee forward, other leg back, fold forward — keep torso upright, cushion under the hip if needed"]],
@@ -263,7 +274,7 @@ const READING = {
     affirmation: "I welcome pleasure, creativity, and change."
   },
   solar: {
-    paragraph: "Your Solar Plexus Chakra is your seat of confidence and personal power — self-worth, willpower, the ability to trust your own decisions. When it needs attention, it often shows up as self-doubt, or deferring to everyone else's judgement over your own.",
+    paragraph: { heal: "Your Solar Plexus Chakra is your seat of confidence and personal power — self-worth, willpower, the ability to trust your own decisions. When it needs attention, it often shows up as self-doubt, or deferring to everyone else's judgement over your own.", amplify: "Your Solar Plexus Chakra is your seat of confidence and personal power — self-worth, willpower, the ability to trust your own decisions. When it's strong, you know your own mind, you're willing to act, and you don't need everyone else's permission first." },
     supporting: [["Yellow Jasper","for sustained energy and endurance","#C9A64C","#957927"],["Lemon Quartz","for mental clarity and optimism","#E8D77E","#C2AC43"]],
     poses: {
       new: [["Boat Pose","sit, lean back slightly, lift your legs — keep knees bent, feet down if easier"],["Plank Pose","straight line from head to heels — drop to your knees if needed"],["Sun Salutations","a flowing sequence linking breath and movement — move slowly, skip any jumps"]],
@@ -273,7 +284,7 @@ const READING = {
     affirmation: "I trust myself and my own power."
   },
   heart: {
-    paragraph: "Your Heart Chakra is about love and connection — to others, and to yourself. It bridges the lower, more physical chakras and the upper, more spiritual ones. When it's asking for attention, it's often grief, guardedness, or difficulty letting people back in.",
+    paragraph: { heal: "Your Heart Chakra is about love and connection — to others, and to yourself. It bridges the lower, more physical chakras and the upper, more spiritual ones. When it's asking for attention, it's often grief, guardedness, or difficulty letting people back in.", amplify: "Your Heart Chakra is about love and connection — to others, and to yourself. It bridges the lower, more physical chakras and the upper, more spiritual ones. When it's open, you give warmth easily, you're able to receive it, and connection feels uncomplicated." },
     supporting: [["Emerald","for harmony in relationships","#3E7A5A","#245038"],["Pink Opal","for gentle emotional healing","#F0C7CE","#DDA0AC"]],
     poses: {
       new: [["Extended Puppy Pose","from all fours, walk your hands forward, hips stay high — a gentle heart-opener, good starting point"],["Cobra Pose","lie on your front, press up gently through your palms, elbows softly bent"],["Bridge Pose","lie on your back, feet flat, lift your hips a little"]],
@@ -283,7 +294,7 @@ const READING = {
     affirmation: "I am open to giving and receiving love."
   },
   throat: {
-    paragraph: "Your Throat Chakra governs truth and self-expression — your ability to actually say what you mean and be heard. When it's blocked, it often shows up as biting your tongue, or feeling unheard again and again in the same relationship or situation.",
+    paragraph: { heal: "Your Throat Chakra governs truth and self-expression — your ability to actually say what you mean and be heard. When it's blocked, it often shows up as biting your tongue, or feeling unheard again and again in the same relationship or situation.", amplify: "Your Throat Chakra governs truth and self-expression — your ability to actually say what you mean and be heard. When it's open, the words come out clearly, you can say the harder thing kindly, and you're ready to share your work." },
     supporting: [["Angelite","for calm, honest communication","#B7CBDB","#8AA6BE"],["Turquoise","for protection while you speak your truth","#5FB3AB","#3B8079"]],
     poses: {
       new: [["Fish Pose","lie on your back, arch your upper back gently — rest on your forearms rather than tilting your head back fully"],["Lion's Breath","inhale deep, exhale forcefully through the mouth, tongue out"],["Neck rolls","slow, gentle circles to release tension"]],
@@ -293,7 +304,7 @@ const READING = {
     affirmation: "My voice matters, and I speak my truth."
   },
   thirdeye: {
-    paragraph: "Your Third Eye Chakra is about clarity and intuition — seeing a situation clearly, and trusting what you already sense before you can fully explain it. When it needs attention, things feel foggy, or you keep circling the same decision without landing anywhere.",
+    paragraph: { heal: "Your Third Eye Chakra is about clarity and intuition — seeing a situation clearly, and trusting what you already sense before you can fully explain it. When it needs attention, things feel foggy, or you keep circling the same decision without landing anywhere.", amplify: "Your Third Eye Chakra is about clarity and intuition — seeing a situation clearly, and trusting what you already sense before you can fully explain it. When it's open, you can see the bigger picture, and a hunch feels like something to act on rather than second-guess." },
     supporting: [],
     poses: {
       new: [["Child's Pose","forehead resting on the floor"],["Downward-Facing Dog","hips lifted high, knees generously bent"],["Wide-Legged Forward Fold","feet wide, fold forward from the hips — hands on blocks or shins"]],
@@ -303,7 +314,7 @@ const READING = {
     affirmation: "I trust what I see and what I know."
   },
   crown: {
-    paragraph: "Your Crown Chakra is about meaning, and your connection to something bigger than the day-to-day. When it's asking for attention, it often shows up as feeling disconnected, running on empty, or searching for a sense of purpose.",
+    paragraph: { heal: "Your Crown Chakra is about meaning, and your connection to something bigger than the day-to-day. When it's asking for attention, it often shows up as feeling disconnected, running on empty, or searching for a sense of purpose.", amplify: "Your Crown Chakra is about meaning, and your connection to something bigger than the day-to-day. When it's open, what you're doing feels aligned, and you've got a clear sense of why it matters." },
     supporting: [["Howlite","for calming an overactive mind","#E8E4DC","#C7C0B2"],["White Agate","for balance and inner strength","#EDEAE2","#D2CCBE"]],
     poses: {
       new: [["Savasana","lie flat, arms relaxed, completely still"],["Seated meditation","spine tall, eyes closed, attention on the breath"],["Lotus Pose","simple cross-legged sitting works just as well"]],
@@ -315,41 +326,80 @@ const READING = {
 };
 
 const CRYSTAL_BLURB = {
-  "Hematite": "Heavy, cool, unmistakably present in the hand — a grounding stone that pulls your energy back down into your body when everything feels like it's spinning.",
-  "Smoky Quartz": "A gentle, smoky grey stone for releasing what you're holding onto — old patterns, stress, the weight of a big change.",
-  "Black Tourmaline": "Your energetic bodyguard — protective, absorbing, a shield against negativity while you learn to trust again.",
-  "Red Jasper": "Warm, deep red, steady — the stone of quiet endurance, a reminder you're more stable than you feel.",
-  "Garnet": "Rich and revitalising — a stone of commitment, to yourself, your goals, the people you love.",
-  "Orange Calcite": "Bright and warm — often called the Stone of Joy, gently reawakening creativity and energy when things have felt flat.",
-  "Moonstone": "Soft and luminous, deeply tied to intuition and emotional flow — good for reconnecting with feeling rather than just going through the motions.",
-  "Carnelian": "Warm orange-red, the classic stone of creativity and courage — a nudge to actually make the thing you've been thinking about.",
-  "Sunstone": "Carries the energy of the sun — warmth, vitality, joy, good for bringing passion back into what you're building.",
-  "Tangerine Quartz": "A powerhouse for creative flow — keep it close to hold onto a spark rather than let it fade.",
-  "Citrine": "Bright and sunny, the classic stone for confidence and abundance — clears self-doubt, supports clearer decisions.",
-  "Tiger's Eye": "Known as the warrior stone — instils courage and determination, helps you hold your ground.",
-  "Pyrite": "Often called Fool's Gold, but there's nothing foolish about it — a stone of protection, clarity, and real manifesting power.",
-  "Amber": "Ancient, warm, golden — carries a quiet, patient wisdom for decisions that need time, not urgency.",
-  "Golden Heliodor": "A stone of confidence and optimism — good company for stepping into something new.",
-  "Rhodochrosite": "Known as the Stone of the Compassionate Heart — nurturing and gentle, good for forgiveness, of someone else or yourself.",
-  "Rose Quartz": "The stone of unconditional love — not only for romance, but for self-compassion, a reminder to be as gentle with yourself as you'd be with someone you love.",
-  "Malachite": "A stone of transformation — helps release what's hurt you so there's room for something new. Intense, so ease into it.",
-  "Green Aventurine": "Calming and steady — eases anxiety and emotional overwhelm, good for staying grounded while your heart stays open.",
-  "Rhodonite": "Balances the emotions and eases old pain — a quiet reminder to extend some of that compassion to yourself.",
-  "Blue Apatite": "Vivid blue, all about honesty — supports the courage to actually say what you mean.",
-  "Blue Lace Agate": "The gentlest throat stone there is — good for anyone who finds speaking up genuinely difficult.",
-  "Aquamarine": "Calming and clear — supports honest, steady expression, especially in conversations you've been avoiding.",
-  "Sodalite": "Clarifying and logical — good for conversations that need a level head.",
-  "Amazonite": "Bridges the heart and the throat — helps you express not just facts, but the feeling underneath them.",
-  "Purple Fluorite": "Clears mental clutter — good for the days you need real focus.",
-  "Azurite": "Deep blue, stimulating — supports inner vision, good for making sense of a situation you've been circling.",
-  "Labradorite": "Iridescent and protective — sharpens intuition, helps you trust a feeling you've been brushing off.",
-  "Lapis Lazuli": "Known as the Stone of Enlightenment — supports big-picture thinking and trusting your own wisdom.",
-  "Iolite": "Sometimes called the Viking's Compass — a stone of inner vision, good for finding direction when you feel lost.",
-  "Amethyst": "Deep violet and calming — supports a quieter, higher mind, good for reconnecting with purpose.",
-  "Selenite": "Pure and clarifying — fittingly, a stone of truth and integrity, good for a clean slate.",
-  "Charoite": "Rare and transformative — supports deep shifts, good company through genuine change.",
-  "Lepidolite": "Naturally calming — its high lithium content makes it especially soothing for an overactive mind.",
-  "Sugilite": "A stone of deep healing and spiritual purpose — good company when you're searching for meaning."
+  heal: {
+    "Hematite": "Heavy and cool in the hand — a grounding stone that draws your energy back down into your body when your mind is racing and nothing feels settled.",
+    "Smoky Quartz": "A soft, smoky-grey quartz for releasing what you're carrying — old patterns, low-level stress, the weight of a change you didn't choose.",
+    "Black Tourmaline": "The classic protective stone — absorbing and steadying, a shield for the times other people's moods or a hard patch are getting under your skin.",
+    "Red Jasper": "Warm, deep red, steady — the stone of quiet endurance, and a reminder you're more solid than you feel right now.",
+    "Garnet": "Rich and revitalising — a stone of commitment and vitality for when your energy or your resolve has been running low.",
+    "Orange Calcite": "Bright and warm — often called the Stone of Joy, for gently coaxing energy and creativity back when things have felt flat.",
+    "Moonstone": "Soft and luminous, tied to intuition and emotional flow — for reconnecting with what you feel when you've been a bit numb to it.",
+    "Carnelian": "Warm orange-red, the classic stone of creativity and courage — a nudge to begin again when your motivation has stalled.",
+    "Sunstone": "Carries the warmth of the sun — for bringing a little vitality and joy back into a stretch that's felt heavy.",
+    "Tangerine Quartz": "A stone of creative spark — for holding onto an idea or a bit of momentum before it fizzles out.",
+    "Citrine": "Bright and sunny, the classic stone of confidence and abundance — for steadying your judgement when self-doubt has crept in.",
+    "Tiger's Eye": "The warrior stone — for finding your footing and holding your ground when you've been talked out of things.",
+    "Pyrite": "Often called Fool's Gold — a stone of protection and clarity for cutting through doubt about your own worth.",
+    "Amber": "Ancient, warm, golden — carries a patient wisdom for decisions that have felt rushed or gone sideways.",
+    "Golden Heliodor": "A stone of confidence and optimism — for steadying yourself before stepping into something unfamiliar.",
+    "Rhodochrosite": "The Stone of the Compassionate Heart — nurturing and gentle, for forgiveness, of someone else or of yourself.",
+    "Rose Quartz": "The stone of unconditional love — a reminder to be as gentle with yourself as you'd be with someone you care about.",
+    "Malachite": "A stone of transformation — for moving through a change that's hurt, and making room for what's next. Intense, so ease into it.",
+    "Green Aventurine": "Calming and steady — for keeping an even keel while your heart's been feeling tender.",
+    "Rhodonite": "Balances the emotions — a quiet reminder to extend some of your compassion inward.",
+    "Blue Apatite": "Vivid blue, all about honesty — for the courage to say the thing you've been holding back.",
+    "Blue Lace Agate": "The gentlest throat stone there is — for anyone who finds speaking up genuinely hard.",
+    "Aquamarine": "Calming and clear — for honest, steady words in a conversation you've been putting off.",
+    "Sodalite": "Clarifying and logical — for a conversation that needs a level head, not more heat.",
+    "Amazonite": "Bridges the heart and the throat — for saying not just the facts but the feeling underneath them.",
+    "Purple Fluorite": "Clears mental clutter — for the foggy days when you can't think straight.",
+    "Azurite": "Deep blue, stimulating — for making sense of a situation you keep circling.",
+    "Labradorite": "Iridescent and protective — sharpens intuition, helps you trust a feeling you've been brushing off.",
+    "Lapis Lazuli": "The Stone of Enlightenment — for stepping back and seeing the bigger picture when you've lost it in the detail.",
+    "Iolite": "Sometimes called the Viking's Compass — a stone of inner vision, for finding your direction when you feel lost.",
+    "Amethyst": "Deep violet and calming — for a quieter mind, and reconnecting with a sense of why when you've been running on empty.",
+    "Selenite": "Pure and clarifying — a stone of truth and a clean slate, for when you need to reset.",
+    "Charoite": "Rare and transformative — good company through a change that's felt destabilising.",
+    "Lepidolite": "Naturally calming — its lithium content makes it especially soothing for an overactive, anxious mind.",
+    "Sugilite": "A stone of deep healing and purpose — good company when you're searching for meaning."
+  },
+  amplify: {
+    "Hematite": "Heavy and cool in the hand — a grounding stone for staying centred and clear-headed while you build something that matters.",
+    "Smoky Quartz": "A soft, smoky-grey quartz for clearing the way — letting go of what's finished so there's room for what you're moving toward.",
+    "Black Tourmaline": "The classic protective stone — for holding your own space and keeping your energy your own while you put yourself out there.",
+    "Red Jasper": "Warm, deep red, steady — the stone of stamina and follow-through, good company when you're in something for the long haul.",
+    "Garnet": "Rich and revitalising — a stone of commitment and drive, for backing yourself fully and seeing something through.",
+    "Orange Calcite": "Bright and warm — often called the Stone of Joy, for leaning into a good mood and letting yourself properly enjoy this chapter.",
+    "Moonstone": "Soft and luminous, tied to intuition and emotional flow — for trusting the quiet nudges guiding you toward something new.",
+    "Carnelian": "Warm orange-red, the classic stone of creativity and courage — for pouring energy into the thing you've been itching to make.",
+    "Sunstone": "Carries the warmth of the sun — for the times you're full of warmth and want to put it into what you're building.",
+    "Tangerine Quartz": "A stone of creative spark — for feeding a run of inspiration and keeping the flow going while it's here.",
+    "Citrine": "Bright and sunny, the classic stone of confidence and abundance — for backing a decision you already feel good about and acting on it.",
+    "Tiger's Eye": "The warrior stone — for the courage to take the lead and go after something you want.",
+    "Pyrite": "Often called Fool's Gold — a stone of manifesting and drive, good company for a new venture or a bold plan.",
+    "Amber": "Ancient, warm, golden — carries a patient wisdom for building something slowly and deliberately, the right way.",
+    "Golden Heliodor": "A stone of confidence and optimism — for stepping into a new role or chapter and owning it.",
+    "Rhodochrosite": "The Stone of the Compassionate Heart — for pouring real warmth into a relationship or a project you love.",
+    "Rose Quartz": "The stone of unconditional love — for going into something new open-hearted and hopeful.",
+    "Malachite": "A stone of transformation — for a change you're choosing, and want to see all the way through. Intense, so ease into it.",
+    "Green Aventurine": "Calming and steady — the “lucky” stone, for staying grounded and open as you take a chance on something.",
+    "Rhodonite": "Balances the emotions — for investing your heart fully in something and staying steady while you do.",
+    "Blue Apatite": "Vivid blue, all about honesty — for putting your idea or your work out into the world clearly.",
+    "Blue Lace Agate": "The gentlest throat stone there is — for sharing something you're a little nervous about, gently and in your own way.",
+    "Aquamarine": "Calming and clear — for speaking about something you care about with confidence and calm.",
+    "Sodalite": "Clarifying and logical — for pitching or presenting an idea clearly and without waffle.",
+    "Amazonite": "Bridges the heart and the throat — for speaking honestly and warmly when it counts.",
+    "Purple Fluorite": "Clears mental clutter — for real focus when you've got a clear run at something.",
+    "Azurite": "Deep blue, stimulating — for following an insight and thinking it all the way through.",
+    "Labradorite": "Iridescent and protective — sharpens intuition, for acting on a clear hunch while it's fresh.",
+    "Lapis Lazuli": "The Stone of Enlightenment — for trusting your own read on things and the direction you're heading.",
+    "Iolite": "Sometimes called the Viking's Compass — a stone of inner vision, for holding your course once you've set it.",
+    "Amethyst": "Deep violet and calming — for staying clear and centred while you follow something that feels genuinely aligned.",
+    "Selenite": "Pure and clarifying — a stone of clarity and integrity, for doing something new the honest way.",
+    "Charoite": "Rare and transformative — for leaning into a pull toward something bigger than the everyday.",
+    "Lepidolite": "Naturally calming — for staying calm and steady while something you're growing gathers pace.",
+    "Sugilite": "A stone of purpose — for the times you feel a real sense of what you're here to do."
+  }
 };
 
 // Keyword classifier for the "other, in your own words" boxes on steps 2 and 3.
@@ -480,9 +530,9 @@ function sendReadingEmail() {
     to_email: state.email,
     crystal_name: state.crystal,
     crystal_icon_url: crystalIconUrl(state.crystal),
-    chakra_line: CHAKRA_LINE[state.chakra],
-    crystal_blurb: CRYSTAL_BLURB[state.crystal],
-    chakra_paragraph: r.paragraph,
+    chakra_line: CHAKRA_LINE[state.polarity][state.chakra],
+    crystal_blurb: CRYSTAL_BLURB[state.polarity][state.crystal],
+    chakra_paragraph: r.paragraph[state.polarity],
     poses_text: posesAsText(r.poses[state.yoga] || r.poses.some),
     affirmation: r.affirmation
   }).then(() => {
@@ -686,7 +736,7 @@ function renderResult(card) {
       <p class="tag">${greeting}</p>
       ${crystalIconSVG(state.crystal, 'crystal-icon')}
       <h2>${state.crystal}</h2>
-      <p class="chakra">${CHAKRA_LINE[state.chakra]}</p>
+      <p class="chakra">${CHAKRA_LINE[state.polarity][state.chakra]}</p>
       <button class="cta" id="seeReading">See your full reading</button>
       <button class="retake" id="retake">Take the quiz again</button>
     </div>`;
@@ -712,9 +762,9 @@ function renderReading(card) {
         <div><h2>${state.crystal}</h2><p>${title}</p></div>
       </div>
       <h3>Your Crystal</h3>
-      <p class="body-text">${CRYSTAL_BLURB[state.crystal]}</p>
+      <p class="body-text">${CRYSTAL_BLURB[state.polarity][state.crystal]}</p>
       <h3>Your Chakra</h3>
-      <p class="body-text">${r.paragraph}</p>
+      <p class="body-text">${r.paragraph[state.polarity]}</p>
       <p class="body-text">${DURATION_NOTE[state.duration]}</p>
       ${r.supporting.length ? `<h3>Supporting Crystals</h3><div class="support-row">${supportHTML}</div>` : ''}
       <h3>How To Use It</h3>
